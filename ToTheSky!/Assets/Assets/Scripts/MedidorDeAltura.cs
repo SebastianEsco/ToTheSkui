@@ -5,7 +5,7 @@ using TMPro;
 
 public class MedidorDeAltura : MonoBehaviour
 {
-    float altura, alturaMomentanea;
+    public float altura, alturaMomentanea;
     public TextMeshProUGUI textoAltura;
     GameObject edificoMasAltoActual;
     private void Start()

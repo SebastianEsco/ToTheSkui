@@ -12,6 +12,8 @@ public class Core : MonoBehaviour
 
     public TextMeshProUGUI textoDiaActual, textoAlturaNecesaria;
 
+    public TextMeshProUGUI textoDeBotonCasa, textoDeBotonIglesia, textoDeBotonElectricidad;
+
     MedidorDeAltura medidor;
 
     private void Start()
@@ -24,7 +26,7 @@ public class Core : MonoBehaviour
     {
         diasTrasncurridos++;
         textoDiaActual.text = "Día: " +  diasTrasncurridos;
-        alturaNecesaria += 3 * diasTrasncurridos;
+        alturaNecesaria += 1.5f * diasTrasncurridos;
         textoAlturaNecesaria.text = "Altura necesaria: " + alturaNecesaria;
         
 
@@ -43,12 +45,14 @@ public class Core : MonoBehaviour
     {
         if (jugandoDia)
         {
-            if(edificiosTotalesPorPoner == 0 && medidor.altura > alturaNecesaria)
+            if (edificiosTotalesPorPoner == 0 )
             {
-                Debug.Log("Dia completado");
                 jugandoDia = false;
-                IniciarDia();
+                Invoke("FinDeDia", 3f);
             }
+            textoDeBotonCasa.text = casasDelDia.ToString();
+            textoDeBotonIglesia.text = iglesiasDelDia.ToString();
+            textoDeBotonElectricidad.text = electricidadDelDia.ToString();
         }
     }
 
@@ -92,6 +96,21 @@ public class Core : MonoBehaviour
         {
             lavaDelDia--;
         }
+    }
+
+    public void FinDeDia()
+    {
+        if (medidor.altura > alturaNecesaria)
+        {
+            Debug.Log("Dia completado");
+            jugandoDia = true;
+            IniciarDia();
+        }
+        else
+        {
+            Debug.Log("No llegaste a la altura :(");
+        }
+        
     }
 
 

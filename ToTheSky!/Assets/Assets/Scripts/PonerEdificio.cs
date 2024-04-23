@@ -6,7 +6,9 @@ public class PonerEdificio : MonoBehaviour
 {
     public GameObject[] edificios;
     MedidorDeAltura medidor;
-    int edificioAPoner;
+    public GameObject camara;
+    public int edificioAPoner;
+    bool clickDeBoton;
 
     Core core;
 
@@ -21,23 +23,32 @@ public class PonerEdificio : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            
-
-            Vector2 posicionDelClic = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if(posicionDelClic.y > -2  && core.RevisarCuantoFaltaPorPoner(edificioAPoner) > 0)
-            {
-                Instantiate(edificios[edificioAPoner], posicionDelClic, Quaternion.identity);
-                core.ReducirEdificio(edificioAPoner);
-                medidor.MedirEdificios();
-            }
-            else
-            {
-                Debug.Log("EdificiosAPoner: " + core.RevisarCuantoFaltaPorPoner(edificioAPoner));
-            }
+            TratarDeConstruir();
 
         }
     }
 
+    public void TratarDeConstruir()
+    {
+        if (!clickDeBoton)
+        {
+            Vector2 posicionDelClic = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if(posicionDelClic.y > camara.transform.position.y -2  && core.RevisarCuantoFaltaPorPoner(edificioAPoner) > 0)
+            {
+                if(posicionDelClic.y < medidor.altura + 10)
+                {
+                    Instantiate(edificios[edificioAPoner], posicionDelClic, Quaternion.identity);
+                    core.ReducirEdificio(edificioAPoner);
+                    medidor.MedirEdificios();
+                }
+                else
+                {
+                    Debug.Log("No puedes construir tan alto");
+                }
+                
+            }
+        }
+    }
     public void EdificoElegido(int edificioElegido)
     {
         edificioAPoner = edificioElegido;

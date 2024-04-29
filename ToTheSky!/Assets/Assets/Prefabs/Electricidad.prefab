@@ -144,7 +144,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4863466905124194462}
   - component: {fileID: 8663668257706738005}
-  - component: {fileID: 816165535478471291}
   - component: {fileID: 6019104106998115988}
   m_Layer: 0
   m_Name: Electricidad
@@ -184,18 +183,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &816165535478471291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6059428692136813446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b602db9e26246240b97a3bcb7082451, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &6019104106998115988
 Rigidbody2D:
   serializedVersion: 4

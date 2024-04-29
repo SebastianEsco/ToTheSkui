@@ -5,63 +5,100 @@ using UnityEngine;
 
 public class Necesidades_casa : MonoBehaviour
 {
-    //private void Start()
-    //{
-    //    Debug.Log("se detecta collider");
-    //}
+    SpriteRenderer sr;
 
+    public bool iglesia, electricidad; //Las necesidades que puede tener un edificio
 
-    private void OnTriggerEnter(Collider other)
+    public bool necesidadIglesiaCumplida, necesidadElectricidadCumplida;
+
+    public int distanciaAIglesia, distanciaAElectricidad;
+    public int cantidadDeEdificiosDeElectricidadCerca, cantidadDeEdificiosDeIglesiaCerca;
+    int cantidadDeNecesidades, cantidadDeNecesidadesCumplidas;
+    MedidorDeAltura medidor;
+    private void Start()
     {
-        Debug.Log("colision activa");
+        sr = GetComponent<SpriteRenderer>();
+        medidor = GameObject.Find("LevelManager").GetComponent<MedidorDeAltura>();
+        Debug.Log(gameObject);
 
-        if (other.CompareTag("Edificio"))
+        if(iglesia)
         {
-            Debug.Log("colision activa");
-            // Obtener el nombre del objeto
-            string nombreObjeto = other.gameObject.name;
-
-            // Llamar a funciones basadas en el nombre del objeto
-            if (nombreObjeto == "Casita")
-            {
-                HacerAlgoParaCasa();
-            }
-            if (nombreObjeto == "Energia")
-            {
-                HacerAlgoParaEnergia();
-            }
-            if (nombreObjeto == "lava")
-            {
-                HacerAlgoParaLava();
-            }
-            if (nombreObjeto == "Iglesia")
-            {
-                HacerAlgoParaIglesia();
-            }
+            cantidadDeNecesidades++;
+        }
+        if (electricidad)
+        {
+            cantidadDeNecesidades++;
         }
     }
 
-    private void HacerAlgoParaCasa()
+    private void Update()
     {
-        Debug.Log("Haciendo algo para la casa...");
-        // Coloca aquí el código para manejar la casa
+        if (medidor.midiendo)
+        {
+            RevisarNecesidades();
+
+            EstadoDeLaNeceidad();
+        }
     }
 
-    private void HacerAlgoParaEnergia()
+    public void RevisarNecesidades()
     {
-        Debug.Log("Haciendo algo para la energía...");
-        // Coloca aquí el código para manejar la energía
+        GameObject[] edificios = GameObject.FindGameObjectsWithTag("Edificio"); //Distancia entre 2 puntos Raiz((Xf - Xi)2 + (Yf - Yi)2)
+
+
+        cantidadDeEdificiosDeIglesiaCerca = 0; cantidadDeEdificiosDeElectricidadCerca = 0;
+
+        foreach (var edificio in edificios)
+        {
+            double distanciaAlEdifico = Math.Sqrt(Math.Pow(transform.position.x - edificio.transform.position.x, 2) +
+                Math.Pow(transform.position.y - edificio.transform.position.y, 2));
+
+
+            if (edificio.name == "Electricidad(Clone)" && distanciaAlEdifico < distanciaAElectricidad)
+            {
+                cantidadDeEdificiosDeElectricidadCerca++;
+            }
+
+            if (edificio.name == "Iglesia(Clone)" && distanciaAlEdifico < distanciaAIglesia)
+            {
+                cantidadDeEdificiosDeIglesiaCerca++;
+            }
+
+        }
+
+
+        if (cantidadDeEdificiosDeIglesiaCerca != 0)
+        {
+            necesidadIglesiaCumplida = true;
+        }
+        else necesidadIglesiaCumplida = false;
+
+        if (cantidadDeEdificiosDeElectricidadCerca != 0)
+        {
+            necesidadElectricidadCumplida = true;
+        }
+        else necesidadElectricidadCumplida = false;
     }
 
-    private void HacerAlgoParaLava()
+    public void EstadoDeLaNeceidad()
     {
-        Debug.Log("Haciendo algo para la lava...");
-        // Coloca aquí el código para manejar la lava
-    }
 
-    private void HacerAlgoParaIglesia()
-    {
-        Debug.Log("Haciendo algo para la iglesia...");
-        // Coloca aquí el código para manejar la iglesia
+        if(electricidad && necesidadElectricidadCumplida)
+        {
+            cantidadDeNecesidadesCumplidas++;
+        }
+        if (iglesia && necesidadIglesiaCumplida)
+        {
+            cantidadDeNecesidadesCumplidas++;
+        }
+
+
+        int intensidadDeRojo = 0 + (255 / cantidadDeNecesidades * cantidadDeNecesidadesCumplidas);
+        Debug.Log(intensidadDeRojo);
+
+        Color color = new Color(255,intensidadDeRojo,intensidadDeRojo);
+        sr.color = color;
     }
+    
+
 }

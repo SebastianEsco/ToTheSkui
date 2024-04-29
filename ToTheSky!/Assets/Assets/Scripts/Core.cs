@@ -26,12 +26,12 @@ public class Core : MonoBehaviour
     {
         diasTrasncurridos++;
         textoDiaActual.text = "Día: " +  diasTrasncurridos;
-        alturaNecesaria += 1.2f * diasTrasncurridos;
+        alturaNecesaria += 0.4f * diasTrasncurridos;
         textoAlturaNecesaria.text = "Altura necesaria: " + alturaNecesaria;
         
 
-        casasDelDia = 3 * diasTrasncurridos;
-        iglesiasDelDia = (diasTrasncurridos/2);
+        casasDelDia = 2 * diasTrasncurridos;
+        iglesiasDelDia = 1 +(diasTrasncurridos/2);
         electricidadDelDia = diasTrasncurridos;
         lavaDelDia = 0;
 

@@ -13,7 +13,7 @@ public class Necesidades_casa : MonoBehaviour
 
     public int distanciaAIglesia, distanciaAElectricidad;
     public int cantidadDeEdificiosDeElectricidadCerca, cantidadDeEdificiosDeIglesiaCerca;
-    int cantidadDeNecesidades, cantidadDeNecesidadesCumplidas;
+    public int cantidadDeNecesidades, cantidadDeNecesidadesCumplidas;
     MedidorDeAltura medidor;
     private void Start()
     {
@@ -82,22 +82,42 @@ public class Necesidades_casa : MonoBehaviour
 
     public void EstadoDeLaNeceidad()
     {
+        cantidadDeNecesidadesCumplidas = 0;
 
-        if(electricidad && necesidadElectricidadCumplida)
+        if(electricidad)
         {
-            cantidadDeNecesidadesCumplidas++;
+            if (necesidadElectricidadCumplida)
+            {
+                cantidadDeNecesidadesCumplidas++;
+            }
+            else
+            {
+                //Mostrar algo para hacer saber que falta electricidad
+            }
+            
         }
-        if (iglesia && necesidadIglesiaCumplida)
+        if (iglesia)
         {
-            cantidadDeNecesidadesCumplidas++;
+            if (necesidadIglesiaCumplida)
+            {
+                cantidadDeNecesidadesCumplidas++;
+            }
+            else
+            {
+                //Mostrar algo para hacer saber que falta iglesia
+            }
         }
 
-
-        int intensidadDeRojo = 0 + (255 / cantidadDeNecesidades * cantidadDeNecesidadesCumplidas);
-        Debug.Log(intensidadDeRojo);
-
-        Color color = new Color(255,intensidadDeRojo,intensidadDeRojo);
-        sr.color = color;
+        if(cantidadDeNecesidades == cantidadDeNecesidadesCumplidas)
+        {
+            //TODO MELO PUEDE SEGUIR BIEN
+            sr.color = Color.white;
+        }
+        else
+        {
+            sr.color = Color.red;
+        }
+        
     }
     
 

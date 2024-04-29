@@ -822,6 +822,7 @@ MonoBehaviour:
   altura: 0
   alturaMomentanea: 0
   textoAltura: {fileID: 1104143663}
+  midiendo: 0
 --- !u!1001 &1102893387
 PrefabInstance:
   m_ObjectHideFlags: 0

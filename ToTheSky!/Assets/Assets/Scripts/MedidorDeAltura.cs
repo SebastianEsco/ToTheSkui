@@ -8,6 +8,7 @@ public class MedidorDeAltura : MonoBehaviour
     public float altura, alturaMomentanea;
     public TextMeshProUGUI textoAltura;
     GameObject edificoMasAltoActual;
+    public bool midiendo;
     private void Start()
     {
         edificoMasAltoActual = null;
@@ -33,6 +34,7 @@ public class MedidorDeAltura : MonoBehaviour
 
     public void MedirEdificios()
     {
+        midiendo = true;
         GameObject[] edificos = GameObject.FindGameObjectsWithTag("Edificio");
         
         foreach (var edificio in edificos)
@@ -62,6 +64,7 @@ public class MedidorDeAltura : MonoBehaviour
         else
         {
             alturaMomentanea = altura;
+            midiendo = false;
         }
         Invoke("RevisarAltura", 0.2f);
 

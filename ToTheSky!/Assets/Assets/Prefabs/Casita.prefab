@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1348153208026103825}
   - component: {fileID: 1348153208026103822}
   - component: {fileID: 1348153208026103823}
+  - component: {fileID: 753321051171623660}
   m_Layer: 0
   m_Name: Casita
   m_TagString: Edificio
@@ -133,3 +134,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &753321051171623660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348153208026103820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b602db9e26246240b97a3bcb7082451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iglesia: 1
+  electricidad: 1
+  necesidadIglesiaCumplida: 0
+  necesidadElectricidadCumplida: 0
+  distanciaAIglesia: 7
+  distanciaAElectricidad: 5
+  cantidadDeEdificiosDeElectricidadCerca: 0
+  cantidadDeEdificiosDeIglesiaCerca: 0

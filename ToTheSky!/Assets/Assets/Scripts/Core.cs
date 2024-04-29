@@ -26,7 +26,7 @@ public class Core : MonoBehaviour
     {
         diasTrasncurridos++;
         textoDiaActual.text = "Día: " +  diasTrasncurridos;
-        alturaNecesaria += 1.5f * diasTrasncurridos;
+        alturaNecesaria += 1.2f * diasTrasncurridos;
         textoAlturaNecesaria.text = "Altura necesaria: " + alturaNecesaria;
         
 

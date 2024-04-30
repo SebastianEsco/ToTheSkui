@@ -16,6 +16,9 @@ public class Core : MonoBehaviour
 
     MedidorDeAltura medidor;
 
+    public GameObject mostrarAlturaNecesaria;
+    public Color colorPorDebajo, colorPorEncima;
+
 
     public int edificiosDesbordados, cantidadDeEdificiosQuePuedenCaer;
 
@@ -51,6 +54,16 @@ public class Core : MonoBehaviour
 
     public void Update()
     {
+        mostrarAlturaNecesaria.transform.position = new Vector2(mostrarAlturaNecesaria.transform.position.x, alturaNecesaria + 0.4f); //Actualizar el mostrador de altura
+
+        if(alturaNecesaria > medidor.altura)
+        {
+            mostrarAlturaNecesaria.GetComponent<SpriteRenderer>().color = colorPorDebajo;
+        }
+        else
+        {
+            mostrarAlturaNecesaria.GetComponent<SpriteRenderer>().color = colorPorEncima;
+        }
 
         if (habitanteInconforme || (edificiosDesbordados == cantidadDeEdificiosQuePuedenCaer))
         {

@@ -19,7 +19,7 @@ public class MedidorDeAltura : MonoBehaviour
         
         if(edificoMasAltoActual != null)
         {
-            altura = edificoMasAltoActual.transform.position.y + 2f;
+            altura = edificoMasAltoActual.transform.position.y;
             
         }
         else

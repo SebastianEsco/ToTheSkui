@@ -5,8 +5,10 @@ using UnityEngine;
 public class PonerEdificio : MonoBehaviour
 {
     public GameObject[] edificios;
+    public GameObject[] edificiosPreview;
     MedidorDeAltura medidor;
     public GameObject camara;
+    GameObject preview;
     public int edificioAPoner;
     bool clickDeBoton;
 
@@ -24,7 +26,30 @@ public class PonerEdificio : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             TratarDeConstruir();
+            Destroy(preview);
 
+        }
+        else
+        {
+            Vector2 posicionDelClic = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if(posicionDelClic.y > camara.transform.position.y - 2.5f && core.RevisarCuantoFaltaPorPoner(edificioAPoner) > 0)
+            {
+                if (preview == null)
+                {
+                    preview = Instantiate(edificiosPreview[edificioAPoner]);
+                }
+
+                if (preview != null)
+                {
+                    preview.transform.position = posicionDelClic;
+                }
+
+                
+            }
+            else
+            {
+                Destroy(preview);
+            }
         }
     }
 
@@ -33,7 +58,7 @@ public class PonerEdificio : MonoBehaviour
         if (!clickDeBoton)
         {
             Vector2 posicionDelClic = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if(posicionDelClic.y > camara.transform.position.y -2  && core.RevisarCuantoFaltaPorPoner(edificioAPoner) > 0)
+            if(posicionDelClic.y > camara.transform.position.y -2.5f  && core.RevisarCuantoFaltaPorPoner(edificioAPoner) > 0)
             {
                 if(posicionDelClic.y < medidor.altura + 10)
                 {
@@ -48,6 +73,11 @@ public class PonerEdificio : MonoBehaviour
                 
             }
         }
+    }
+
+    void PrevisualizarEdificio()
+    {
+        
     }
     public void EdificoElegido(int edificioElegido)
     {

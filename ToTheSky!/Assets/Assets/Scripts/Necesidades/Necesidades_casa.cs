@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Necesidades_casa : MonoBehaviour
 {
     SpriteRenderer sr;
+
+    public GameObject testigoElectricidad, testigoIglesia;
 
     public bool iglesia, electricidad; //Las necesidades que puede tener un edificio
 
@@ -14,31 +17,36 @@ public class Necesidades_casa : MonoBehaviour
     public int distanciaAIglesia, distanciaAElectricidad;
     public int cantidadDeEdificiosDeElectricidadCerca, cantidadDeEdificiosDeIglesiaCerca;
     public int cantidadDeNecesidades, cantidadDeNecesidadesCumplidas;
+
+    int diaEnElQueSePuso;
     MedidorDeAltura medidor;
+    Core core;
     private void Start()
     {
+        core = GameObject.Find("Core").GetComponent<Core>();
+        diaEnElQueSePuso = core.diasTrasncurridos;
         sr = GetComponent<SpriteRenderer>();
+        
         medidor = GameObject.Find("LevelManager").GetComponent<MedidorDeAltura>();
         Debug.Log(gameObject);
 
         if(iglesia)
         {
             cantidadDeNecesidades++;
+            testigoIglesia.SetActive(false);
         }
         if (electricidad)
         {
             cantidadDeNecesidades++;
+            testigoElectricidad.SetActive(false);
         }
     }
 
     private void Update()
     {
-        if (medidor.midiendo)
-        {
-            RevisarNecesidades();
-
-            EstadoDeLaNeceidad();
-        }
+        EstadoDeLaNeceidad();
+        RevisarNecesidades();
+        
     }
 
     public void RevisarNecesidades()
@@ -89,10 +97,11 @@ public class Necesidades_casa : MonoBehaviour
             if (necesidadElectricidadCumplida)
             {
                 cantidadDeNecesidadesCumplidas++;
+                testigoElectricidad.SetActive(false);
             }
             else
             {
-                //Mostrar algo para hacer saber que falta electricidad
+                testigoElectricidad.SetActive(true);
             }
             
         }
@@ -101,10 +110,11 @@ public class Necesidades_casa : MonoBehaviour
             if (necesidadIglesiaCumplida)
             {
                 cantidadDeNecesidadesCumplidas++;
+                testigoIglesia.SetActive(false);
             }
             else
             {
-                //Mostrar algo para hacer saber que falta iglesia
+                testigoIglesia.SetActive(true);
             }
         }
 
@@ -112,10 +122,26 @@ public class Necesidades_casa : MonoBehaviour
         {
             //TODO MELO PUEDE SEGUIR BIEN
             sr.color = Color.white;
+            diaEnElQueSePuso = core.diasTrasncurridos;
         }
         else
         {
-            sr.color = Color.red;
+            if(diaEnElQueSePuso == core.diasTrasncurridos - 1)
+            {
+                sr.color = Color.yellow;
+            }
+            else if(diaEnElQueSePuso == core.diasTrasncurridos - 2)
+            {
+                sr.color = Color.red;
+            }
+            else if(diaEnElQueSePuso == core.diasTrasncurridos - 3)
+            {
+                sr.color = Color.black;
+
+                core.habitanteInconforme = true;
+                Debug.Log("FALLASTE CON LAS NECESIDADES DE UN HABITANTE");
+            }
+            
         }
         
     }

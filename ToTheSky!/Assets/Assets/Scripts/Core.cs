@@ -5,10 +5,10 @@ using TMPro;
 
 public class Core : MonoBehaviour
 {
-    int diasTrasncurridos;
+    public int diasTrasncurridos;
     float alturaNecesaria;
     int casasDelDia, iglesiasDelDia, electricidadDelDia, lavaDelDia, edificiosTotalesPorPoner;
-    bool jugandoDia;
+    public bool jugandoDia, habitanteInconforme;
 
     public TextMeshProUGUI textoDiaActual, textoAlturaNecesaria;
 
@@ -24,25 +24,32 @@ public class Core : MonoBehaviour
 
     public void IniciarDia()
     {
-        diasTrasncurridos++;
-        textoDiaActual.text = "Día: " +  diasTrasncurridos;
-        alturaNecesaria += 0.4f * diasTrasncurridos;
-        textoAlturaNecesaria.text = "Altura necesaria: " + alturaNecesaria;
-        
+        if(!habitanteInconforme)
+        {
+            diasTrasncurridos++;
+            textoDiaActual.text = "Día: " + diasTrasncurridos;
+            alturaNecesaria += 0.4f * diasTrasncurridos;
+            textoAlturaNecesaria.text = "Altura necesaria: " + alturaNecesaria;
 
-        casasDelDia = 2 * diasTrasncurridos;
-        iglesiasDelDia = 1 +(diasTrasncurridos/2);
-        electricidadDelDia = diasTrasncurridos;
-        lavaDelDia = 0;
 
-        edificiosTotalesPorPoner = casasDelDia + iglesiasDelDia + electricidadDelDia + lavaDelDia;
-        jugandoDia = true;
+            casasDelDia = 2 * diasTrasncurridos;
+            iglesiasDelDia = 1 + (diasTrasncurridos / 2);
+            electricidadDelDia = diasTrasncurridos;
+            lavaDelDia = 0;
+
+            edificiosTotalesPorPoner = casasDelDia + iglesiasDelDia + electricidadDelDia + lavaDelDia;
+            jugandoDia = true;
+        }
         
         
     }
 
     public void Update()
     {
+        if (habitanteInconforme)
+        {
+            casasDelDia = 0; iglesiasDelDia = 0; electricidadDelDia = 0;
+        }
         if (jugandoDia)
         {
             if (edificiosTotalesPorPoner == 0 )
@@ -102,9 +109,12 @@ public class Core : MonoBehaviour
     {
         if (medidor.altura > alturaNecesaria)
         {
-            Debug.Log("Dia completado");
-            jugandoDia = true;
-            IniciarDia();
+            if (!habitanteInconforme)
+            {
+                Debug.Log("Dia completado");
+                
+                Invoke("IniciarDia", 0.5f);
+            }
         }
         else
         {

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,12 +15,19 @@ public class Necesidades_casa : MonoBehaviour
     public int distanciaAIglesia, distanciaAElectricidad;
     public int cantidadDeEdificiosDeElectricidadCerca, cantidadDeEdificiosDeIglesiaCerca;
     public int cantidadDeNecesidades, cantidadDeNecesidadesCumplidas;
+
+    public GameObject SimboloElectricidad;
+    public GameObject SimboloIglesia;
+
+    //private bool Simbolo_Electricidad = false;
+
     MedidorDeAltura medidor;
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         medidor = GameObject.Find("LevelManager").GetComponent<MedidorDeAltura>();
         Debug.Log(gameObject);
+
 
         if(iglesia)
         {
@@ -29,9 +37,12 @@ public class Necesidades_casa : MonoBehaviour
         {
             cantidadDeNecesidades++;
         }
-    }
 
-    private void Update()
+        
+
+}
+
+    private void Update() 
     {
         if (medidor.midiendo)
         {
@@ -89,10 +100,13 @@ public class Necesidades_casa : MonoBehaviour
             if (necesidadElectricidadCumplida)
             {
                 cantidadDeNecesidadesCumplidas++;
+                True_Electricidad();
             }
             else
             {
+                False_Electricidad();
                 //Mostrar algo para hacer saber que falta electricidad
+                //Debug.Log("no hay electricidad");
             }
             
         }
@@ -101,10 +115,12 @@ public class Necesidades_casa : MonoBehaviour
             if (necesidadIglesiaCumplida)
             {
                 cantidadDeNecesidadesCumplidas++;
+                True_Iglesia();
             }
             else
             {
                 //Mostrar algo para hacer saber que falta iglesia
+                False_Iglesia();
             }
         }
 
@@ -119,6 +135,34 @@ public class Necesidades_casa : MonoBehaviour
         }
         
     }
-    
+
+
+    /// <summary>
+    /// SIMBOLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
+    /// </summary>
+    public void True_Electricidad()
+    {
+        SimboloElectricidad.SetActive(false);
+        Debug.Log("se detectó electricidad");
+    }
+
+    public void False_Electricidad()
+    {
+       SimboloElectricidad.SetActive(true);
+        Debug.Log("No se detectó electricidad");
+    }
+
+    public void True_Iglesia()
+    {
+        SimboloIglesia.SetActive(false);
+        Debug.Log("se detectó iglesia");
+    }
+
+    public void False_Iglesia()
+    {
+        SimboloIglesia.SetActive(true);
+        Debug.Log("No se detectó iglesia");
+    }
+
 
 }

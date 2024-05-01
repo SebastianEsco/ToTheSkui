@@ -8,14 +8,15 @@ public class Necesidades_casa : MonoBehaviour
 {
     SpriteRenderer sr;
 
-    public GameObject testigoElectricidad, testigoIglesia;
+    public GameObject testigoElectricidad, testigoIglesia, testigoCalor;
 
-    public bool iglesia, electricidad; //Las necesidades que puede tener un edificio
+    public bool iglesia, electricidad,calor; //Las necesidades que puede tener un edificio
+                                      //Calor se refiere a lava
 
-    public bool necesidadIglesiaCumplida, necesidadElectricidadCumplida;
+    public bool necesidadIglesiaCumplida, necesidadElectricidadCumplida, necesidadCalorCumplida;
 
-    public int distanciaAIglesia, distanciaAElectricidad;
-    public int cantidadDeEdificiosDeElectricidadCerca, cantidadDeEdificiosDeIglesiaCerca;
+    public float distanciaAIglesia, distanciaAElectricidad, distanciaALava;
+    public int cantidadDeEdificiosDeElectricidadCerca, cantidadDeEdificiosDeIglesiaCerca, cantidadDeEdificiosDeLavaCerca;
     public int cantidadDeNecesidades, cantidadDeNecesidadesCumplidas;
 
     int diaEnElQueSePuso;
@@ -39,6 +40,11 @@ public class Necesidades_casa : MonoBehaviour
         {
             cantidadDeNecesidades++;
             testigoElectricidad.SetActive(false);
+        }
+        if (calor)
+        {
+            cantidadDeNecesidades++;
+            testigoCalor.SetActive(false);
         }
     }
 
@@ -72,20 +78,40 @@ public class Necesidades_casa : MonoBehaviour
                 cantidadDeEdificiosDeIglesiaCerca++;
             }
 
+            if (edificio.name == "Lava(Clone)" && distanciaAlEdifico < distanciaALava)
+            {
+                cantidadDeEdificiosDeLavaCerca++;
+            }
+
         }
 
 
+        //Revision Iglesia
         if (cantidadDeEdificiosDeIglesiaCerca != 0)
         {
             necesidadIglesiaCumplida = true;
         }
         else necesidadIglesiaCumplida = false;
 
+
+        //Revision electricidad
         if (cantidadDeEdificiosDeElectricidadCerca != 0)
         {
             necesidadElectricidadCumplida = true;
         }
         else necesidadElectricidadCumplida = false;
+
+
+        //Revision Lava
+        if (cantidadDeEdificiosDeLavaCerca != 0)
+        {
+            necesidadCalorCumplida = true;
+        }
+        else if (transform.position.y < 5)
+        {
+            necesidadCalorCumplida = true;
+        }
+        else necesidadCalorCumplida = false;
     }
 
     public void EstadoDeLaNeceidad()
@@ -118,11 +144,24 @@ public class Necesidades_casa : MonoBehaviour
             }
         }
 
-        if(cantidadDeNecesidades == cantidadDeNecesidadesCumplidas)
+        if (calor)
         {
-            //TODO MELO PUEDE SEGUIR BIEN
+            if (necesidadCalorCumplida)
+            {
+                cantidadDeNecesidadesCumplidas++;
+                testigoCalor.SetActive(false);
+            }
+            else
+            {
+                testigoCalor.SetActive(true);
+            }
+        }
+
+        if (cantidadDeNecesidades == cantidadDeNecesidadesCumplidas)
+        {
+
             sr.color = Color.white;
-            diaEnElQueSePuso = core.diasTrasncurridos;
+            Invoke("RevisarSiCumplioMomentaneo", 1.5f);
         }
         else
         {
@@ -145,6 +184,16 @@ public class Necesidades_casa : MonoBehaviour
         }
         
     }
-    
+
+    public void RevisarSiCumplioMomentaneo()
+    {
+        if (cantidadDeNecesidades == cantidadDeNecesidadesCumplidas)
+        {
+            //TODO MELO PUEDE SEGUIR BIEN
+            diaEnElQueSePuso = core.diasTrasncurridos;
+        }
+    }
+
+
 
 }

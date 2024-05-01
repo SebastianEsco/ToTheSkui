@@ -2,29 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class Core : MonoBehaviour
 {
     public int diasTrasncurridos;
     float alturaNecesaria;
-    int casasDelDia, iglesiasDelDia, electricidadDelDia, lavaDelDia, edificiosTotalesPorPoner;
+
+    //Crear un int por cada edificio que será necesario en el dia
+    int casasDelDia, iglesiasDelDia, electricidadDelDia, lavaDelDia, casasGrandesDelDia, edificiosTotalesPorPoner;
+
+    //Bools para saber si se puede seguir jugando
     public bool jugandoDia, habitanteInconforme;
 
+
+    //Textos para actualizar
     public TextMeshProUGUI textoDiaActual, textoAlturaNecesaria;
 
-    public TextMeshProUGUI textoDeBotonCasa, textoDeBotonIglesia, textoDeBotonElectricidad;
+
+    //Texto de cada botón para actualizar cuanto toca poner de ese específico
+    public TextMeshProUGUI textoDeBotonCasa, textoDeBotonIglesia, textoDeBotonElectricidad, textoDeBotonLava, textoBotonCasaGrande;
+    //TODO: Hacer esto una lista
 
     MedidorDeAltura medidor;
 
-    public GameObject mostrarAlturaNecesaria;
-    public Color colorPorDebajo, colorPorEncima;
+    
+    public GameObject mostrarAlturaNecesaria; //La barrita que muestra la altura que se necesita
+    public Color colorPorDebajo, colorPorEncima; //Los colores de la barrita
 
 
-    public int edificiosDesbordados, cantidadDeEdificiosQuePuedenCaer;
+    public int edificiosDesbordados, cantidadDeEdificiosQuePuedenCaer; //Cuenta los edificios que se han caido y los que se pueden caer
 
+
+    int contadorParaCasasGrandes;
     private void Start()
     {
-        cantidadDeEdificiosQuePuedenCaer = 1; //Para que entre la primera vez, si es 0 no entra
+        cantidadDeEdificiosQuePuedenCaer = 1; //Para que incie el día 1 la primera vez, si es = 0 no entra
         medidor = GameObject.Find("LevelManager").GetComponent<MedidorDeAltura>();
         IniciarDia();
     }
@@ -40,12 +53,32 @@ public class Core : MonoBehaviour
             textoAlturaNecesaria.text = "Altura necesaria: " + alturaNecesaria;
 
 
-            casasDelDia = 2 * diasTrasncurridos;
+            casasDelDia = Convert.ToInt32(1.75f * diasTrasncurridos);
             iglesiasDelDia = 1 + (diasTrasncurridos / 2);
             electricidadDelDia = diasTrasncurridos;
-            lavaDelDia = 0;
 
-            edificiosTotalesPorPoner = casasDelDia + iglesiasDelDia + electricidadDelDia + lavaDelDia;
+            if(diasTrasncurridos%3 == 0)
+            {
+                lavaDelDia = Convert.ToInt32(diasTrasncurridos/2.5f);
+            }
+            else
+            {
+                lavaDelDia = 0;
+            }
+
+
+            if (diasTrasncurridos % 4 == 0)
+            {
+                casasGrandesDelDia = Convert.ToInt32(diasTrasncurridos / 4) + contadorParaCasasGrandes;
+                contadorParaCasasGrandes++;
+            }
+            else
+            {
+                casasGrandesDelDia = 1;
+            }
+
+
+            edificiosTotalesPorPoner = casasDelDia + iglesiasDelDia + electricidadDelDia + lavaDelDia + casasGrandesDelDia;
             jugandoDia = true;
         }
         
@@ -77,9 +110,14 @@ public class Core : MonoBehaviour
                 jugandoDia = false;
                 Invoke("FinDeDia", 3f);
             }
+
+            //Actualizar cuantos edificios falta poner
             textoDeBotonCasa.text = casasDelDia.ToString();
             textoDeBotonIglesia.text = iglesiasDelDia.ToString();
             textoDeBotonElectricidad.text = electricidadDelDia.ToString();
+            textoDeBotonLava.text = lavaDelDia.ToString();
+            textoBotonCasaGrande.text = casasGrandesDelDia.ToString();
+
         }
     }
 

@@ -130,7 +130,7 @@ MonoBehaviour:
   necesidadIglesiaCumplida: 0
   necesidadElectricidadCumplida: 0
   distanciaAIglesia: 0
-  distanciaAElectricidad: 4
+  distanciaAElectricidad: 3
   cantidadDeEdificiosDeElectricidadCerca: 0
   cantidadDeEdificiosDeIglesiaCerca: 0
   cantidadDeNecesidades: 0

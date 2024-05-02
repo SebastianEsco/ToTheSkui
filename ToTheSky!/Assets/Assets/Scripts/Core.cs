@@ -25,6 +25,7 @@ public class Core : MonoBehaviour
     public List<TextMeshProUGUI> textosDeLosBotones = new List<TextMeshProUGUI>();
 
     MedidorDeAltura medidor;
+    ManejadorUI manejadorUI;
 
     
     public GameObject mostrarAlturaNecesaria; //La barrita que muestra la altura que se necesita
@@ -39,6 +40,7 @@ public class Core : MonoBehaviour
     {
         cantidadDeEdificiosQuePuedenCaer = 1; //Para que incie el día 1 la primera vez, si es = 0 no entra
         medidor = GameObject.Find("LevelManager").GetComponent<MedidorDeAltura>();
+        manejadorUI = GameObject.Find("ManejadorUI").GetComponent<ManejadorUI>();
         IniciarDia();
     }
 
@@ -113,9 +115,17 @@ public class Core : MonoBehaviour
 
         if (habitanteInconforme || (edificiosDesbordados >= cantidadDeEdificiosQuePuedenCaer))
         {
-            Debug.Log("Perdió por sapo");
 
             //TRIGGER PANTALLA DE DERROTA
+            if (habitanteInconforme)
+            {
+                manejadorUI.MostrarQueSePerdio("No supliste las necesidades de un habitante");
+            }
+            else
+            {
+                manejadorUI.MostrarQueSePerdio("Demasiados habitantes cayeron :(");
+            }
+
 
             for (int i = 0; i < edificiosDelDia.Count; i++)
             {
@@ -204,6 +214,7 @@ public class Core : MonoBehaviour
         }
         else
         {
+            manejadorUI.MostrarQueSePerdio("No llegaste a la altura");
             Debug.Log("No llegaste a la altura :(");
         }
         

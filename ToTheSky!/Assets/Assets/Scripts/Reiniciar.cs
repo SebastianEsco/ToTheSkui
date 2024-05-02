@@ -15,4 +15,9 @@ public class Reiniciar : MonoBehaviour
             SceneManager.LoadScene("Principal");
         }
     }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("Principal");
+    }
 }

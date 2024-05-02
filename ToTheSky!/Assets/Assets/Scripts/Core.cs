@@ -74,7 +74,7 @@ public class Core : MonoBehaviour
             }
             else
             {
-                casasGrandesDelDia = 1;
+                casasGrandesDelDia = 0;
             }
 
 
@@ -139,6 +139,10 @@ public class Core : MonoBehaviour
         {
             return lavaDelDia;
         }
+        if(index == 4)
+        {
+            return casasGrandesDelDia;
+        }
         return -1;
     }
 
@@ -160,6 +164,10 @@ public class Core : MonoBehaviour
         if (index == 3)
         {
             lavaDelDia--;
+        }
+        if (index == 4)
+        {
+            casasGrandesDelDia--;
         }
     }
 

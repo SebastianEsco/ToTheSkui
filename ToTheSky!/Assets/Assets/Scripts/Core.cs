@@ -10,7 +10,8 @@ public class Core : MonoBehaviour
     float alturaNecesaria;
 
     //Crear un int por cada edificio que será necesario en el dia
-    int casasDelDia, iglesiasDelDia, electricidadDelDia, lavaDelDia, casasGrandesDelDia, edificiosTotalesPorPoner;
+    public List<int> edificiosDelDia = new List<int>();
+    int edificiosTotalesPorPoner;
 
     //Bools para saber si se puede seguir jugando
     public bool jugandoDia, habitanteInconforme;
@@ -21,8 +22,7 @@ public class Core : MonoBehaviour
 
 
     //Texto de cada botón para actualizar cuanto toca poner de ese específico
-    public TextMeshProUGUI textoDeBotonCasa, textoDeBotonIglesia, textoDeBotonElectricidad, textoDeBotonLava, textoBotonCasaGrande;
-    //TODO: Hacer esto una lista
+    public List<TextMeshProUGUI> textosDeLosBotones = new List<TextMeshProUGUI>();
 
     MedidorDeAltura medidor;
 
@@ -53,32 +53,42 @@ public class Core : MonoBehaviour
             textoAlturaNecesaria.text = "Altura necesaria: " + alturaNecesaria;
 
 
-            casasDelDia = Convert.ToInt32(1.75f * diasTrasncurridos);
-            iglesiasDelDia = 1 + (diasTrasncurridos / 2);
-            electricidadDelDia = diasTrasncurridos;
+            //Edificios del día
+
+            edificiosDelDia[0] += Convert.ToInt32(1.75f * diasTrasncurridos);
+            edificiosDelDia[1] += 1 + (diasTrasncurridos / 2);
+            edificiosDelDia[2] += diasTrasncurridos;
 
             if(diasTrasncurridos%3 == 0)
             {
-                lavaDelDia = Convert.ToInt32(diasTrasncurridos/2.5f);
+                edificiosDelDia[3] += Convert.ToInt32(diasTrasncurridos/2.5f);
             }
             else
             {
-                lavaDelDia = 0;
+                edificiosDelDia[3] += 0;
             }
 
 
             if (diasTrasncurridos % 4 == 0)
             {
-                casasGrandesDelDia = Convert.ToInt32(diasTrasncurridos / 4) + contadorParaCasasGrandes;
+                edificiosDelDia[4] += Convert.ToInt32(diasTrasncurridos / 4) + contadorParaCasasGrandes;
                 contadorParaCasasGrandes++;
             }
             else
             {
-                casasGrandesDelDia = 0;
+                edificiosDelDia[4] += 0;
             }
 
 
-            edificiosTotalesPorPoner = casasDelDia + iglesiasDelDia + electricidadDelDia + lavaDelDia + casasGrandesDelDia;
+
+
+            foreach (var cantidad in edificiosDelDia)
+            {
+                if(cantidad > 0)
+                {
+                    edificiosTotalesPorPoner += cantidad;
+                }
+            }
             jugandoDia = true;
         }
         
@@ -87,6 +97,7 @@ public class Core : MonoBehaviour
 
     public void Update()
     {
+        //Linea de la altura minima
         mostrarAlturaNecesaria.transform.position = new Vector2(mostrarAlturaNecesaria.transform.position.x, alturaNecesaria + 0.4f); //Actualizar el mostrador de altura
 
         if(alturaNecesaria > medidor.altura)
@@ -98,11 +109,21 @@ public class Core : MonoBehaviour
             mostrarAlturaNecesaria.GetComponent<SpriteRenderer>().color = colorPorEncima;
         }
 
-        if (habitanteInconforme || (edificiosDesbordados == cantidadDeEdificiosQuePuedenCaer))
+
+
+        if (habitanteInconforme || (edificiosDesbordados >= cantidadDeEdificiosQuePuedenCaer))
         {
             Debug.Log("Perdió por sapo");
-            casasDelDia = 0; iglesiasDelDia = 0; electricidadDelDia = 0;
+
+            //TRIGGER PANTALLA DE DERROTA
+
+            for (int i = 0; i < edificiosDelDia.Count; i++)
+            {
+                edificiosDelDia[i] = 0;
+            }
         }
+
+
         if (jugandoDia)
         {
             if (edificiosTotalesPorPoner == 0 )
@@ -112,36 +133,35 @@ public class Core : MonoBehaviour
             }
 
             //Actualizar cuantos edificios falta poner
-            textoDeBotonCasa.text = casasDelDia.ToString();
-            textoDeBotonIglesia.text = iglesiasDelDia.ToString();
-            textoDeBotonElectricidad.text = electricidadDelDia.ToString();
-            textoDeBotonLava.text = lavaDelDia.ToString();
-            textoBotonCasaGrande.text = casasGrandesDelDia.ToString();
+            for (int i = 0; i < textosDeLosBotones.Count; i++)
+            {
+                textosDeLosBotones[i].text = edificiosDelDia[i].ToString();
+            }
 
         }
     }
 
     public int RevisarCuantoFaltaPorPoner(int index)
     {
-        if(index == 0)
+        if(index == 0) //Casa
         {
-            return casasDelDia;
+            return edificiosDelDia[0];
         }
-        if (index == 1)
+        if (index == 1) //Iglesia
         {
-            return iglesiasDelDia;
+            return edificiosDelDia[1];
         }
-        if (index == 2)
+        if (index == 2) //Energia
         {
-            return electricidadDelDia;
+            return edificiosDelDia[2];
         }
-        if (index == 3)
+        if (index == 3) //lava
         {
-            return lavaDelDia;
+            return edificiosDelDia[3];
         }
-        if(index == 4)
+        if(index == 4) //Casa grandes
         {
-            return casasGrandesDelDia;
+            return edificiosDelDia[4];
         }
         return -1;
     }
@@ -149,25 +169,25 @@ public class Core : MonoBehaviour
     public void ReducirEdificio(int index)
     {
         edificiosTotalesPorPoner--;
-        if (index == 0)
+        if (index == 0) //Casas
         {
-            casasDelDia--;
+            edificiosDelDia[0]--;
         }
-        if (index == 1)
+        if (index == 1) //Iglesias
         {
-            iglesiasDelDia--;
+            edificiosDelDia[1]--;
         }
-        if (index == 2)
+        if (index == 2) //Energia
         {
-            electricidadDelDia--;
+            edificiosDelDia[2]--;
         }
-        if (index == 3)
+        if (index == 3) //Lava
         {
-            lavaDelDia--;
+            edificiosDelDia[3]--;
         }
-        if (index == 4)
+        if (index == 4) //Casas grandes
         {
-            casasGrandesDelDia--;
+            edificiosDelDia[4]--;
         }
     }
 
@@ -178,8 +198,8 @@ public class Core : MonoBehaviour
             if (!habitanteInconforme)
             {
                 Debug.Log("Dia completado");
-                
-                Invoke("IniciarDia", 0.5f);
+
+                ActivarCambioDeDia();
             }
         }
         else
@@ -187,6 +207,11 @@ public class Core : MonoBehaviour
             Debug.Log("No llegaste a la altura :(");
         }
         
+    }
+
+    public void ActivarCambioDeDia()
+    {
+        GameObject.Find("ManejadorUI").GetComponent<ManejadorUI>().MostrarHabilidades(true);
     }
 
 

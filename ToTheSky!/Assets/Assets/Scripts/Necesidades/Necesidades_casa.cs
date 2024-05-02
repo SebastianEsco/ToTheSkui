@@ -19,6 +19,9 @@ public class Necesidades_casa : MonoBehaviour
     public int cantidadDeEdificiosDeElectricidadCerca, cantidadDeEdificiosDeIglesiaCerca, cantidadDeEdificiosDeLavaCerca;
     public int cantidadDeNecesidades, cantidadDeNecesidadesCumplidas;
 
+
+    MejorasAEdificios mejoras;
+
     int diaEnElQueSePuso;
     MedidorDeAltura medidor;
     Core core;
@@ -27,6 +30,7 @@ public class Necesidades_casa : MonoBehaviour
         core = GameObject.Find("Core").GetComponent<Core>();
         diaEnElQueSePuso = core.diasTrasncurridos;
         sr = GetComponent<SpriteRenderer>();
+        mejoras = GameObject.Find("LevelManager").GetComponent<MejorasAEdificios>();
         
         medidor = GameObject.Find("LevelManager").GetComponent<MedidorDeAltura>();
         Debug.Log(gameObject);
@@ -68,17 +72,17 @@ public class Necesidades_casa : MonoBehaviour
                 Math.Pow(transform.position.y - edificio.transform.position.y, 2));
 
 
-            if (edificio.name == "Electricidad(Clone)" && distanciaAlEdifico < distanciaAElectricidad)
+            if (edificio.name == "Electricidad(Clone)" && distanciaAlEdifico < distanciaAElectricidad + mejoras.bonus[1])
             {
                 cantidadDeEdificiosDeElectricidadCerca++;
             }
 
-            if (edificio.name == "Iglesia(Clone)" && distanciaAlEdifico < distanciaAIglesia)
+            if (edificio.name == "Iglesia(Clone)" && distanciaAlEdifico < distanciaAIglesia + mejoras.bonus[0])
             {
                 cantidadDeEdificiosDeIglesiaCerca++;
             }
 
-            if (edificio.name == "Lava(Clone)" && distanciaAlEdifico < distanciaALava)
+            if (edificio.name == "Lava(Clone)" && distanciaAlEdifico < distanciaALava + mejoras.bonus[2])
             {
                 cantidadDeEdificiosDeLavaCerca++;
             }

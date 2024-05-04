@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a61aa2dc8b6884c9e18c9dd1f345ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indexHabilidad: 0
+  indexHabilidad: 3
 --- !u!1 &2902077221140571811
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lava extra
+  m_text: Calmar habitantes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 6166947055159275648}
   - component: {fileID: 8652361855043410098}
   m_Layer: 5
-  m_Name: Habilidad Lava
+  m_Name: 4) HabilidadCalamarHabitantes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Consigue un edificio de lava extra en el pr\xF3ximo d\xEDa"
+  m_text: "Los habitante perdonar\xE1n que se caigan algunas casa extra"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -516,14 +516,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.09377992, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1995469143, guid: 297b60a0c88df0e41ad98f135517edc1, type: 3}
+  m_Sprite: {fileID: -436880877, guid: ab9cd9f29c433344aa5f94ca68110eb9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

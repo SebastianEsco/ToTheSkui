@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 6166947055159275648}
   - component: {fileID: 8652361855043410098}
   m_Layer: 5
-  m_Name: HabilidadPlantilla 1
+  m_Name: 3) HabilidadMejoraIglesia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -523,7 +523,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 897651513, guid: 297b60a0c88df0e41ad98f135517edc1, type: 3}
+  m_Sprite: {fileID: -436880877, guid: ab9cd9f29c433344aa5f94ca68110eb9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

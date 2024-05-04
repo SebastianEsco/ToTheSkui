@@ -27,14 +27,31 @@ public class Habilidades : MonoBehaviour
 
             case 1: //Habilidad de mejorar el rango de la energía
 
-                mejoras.MejorarEdificio(1,0.5f);
+                mejoras.MejorarEdificio(1,0.3f);
 
                 break;
 
-            case 2: //Habilidad de mejorar el rango de la energía
+            case 2: //Habilidad de mejorar el rango de la iglesia
 
-                mejoras.MejorarEdificio(0, 0.5f);
+                mejoras.MejorarEdificio(0, 0.3f);
 
+                break;
+
+            case 3: //Reduce la ira de los habitantes
+
+                Debug.Log("Holi");
+                core.edificiosDesbordados -= 5;
+
+                break;
+
+             case 4: //Bajar altura
+                core.alturaNecesaria -= core.diasTrasncurridos * 0.5f;
+                break;
+
+            case 5: //Aumenta rango de energía, reduce el de las iglesias
+
+                mejoras.MejorarEdificio(1, 0.75f);
+                mejoras.MejorarEdificio(0, -0.75f);
                 break;
 
             default:

@@ -7,7 +7,7 @@ using System;
 public class Core : MonoBehaviour
 {
     public int diasTrasncurridos;
-    float alturaNecesaria;
+    public float alturaNecesaria;
 
     //Crear un int por cada edificio que será necesario en el dia
     public List<int> edificiosDelDia = new List<int>();

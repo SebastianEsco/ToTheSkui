@@ -196,6 +196,9 @@ MonoBehaviour:
   - {fileID: 5811279801633228813, guid: 433151b18df78474e85eb6ab08b0d557, type: 3}
   - {fileID: 5811279801633228813, guid: dc111df7d14319e429c3888422aa3f01, type: 3}
   - {fileID: 5811279801633228813, guid: 8ea2794e0edb55c4182140aa266935af, type: 3}
+  - {fileID: 5811279801633228813, guid: 9047f3d25cc8dfa4180b4f9e01eca935, type: 3}
+  - {fileID: 5811279801633228813, guid: a92aba9df713eee4ebf0314e396ea3bb, type: 3}
+  - {fileID: 5811279801633228813, guid: 6df3fb48c8f303f4bbc2c48857fdbb16, type: 3}
   habilidad1: {fileID: 0}
   habilidad2: {fileID: 0}
   habilidad3: {fileID: 0}
@@ -1545,6 +1548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diasTrasncurridos: 0
+  alturaNecesaria: 0
   edificiosDelDia: 0000000000000000000000000000000000000000
   jugandoDia: 0
   habitanteInconforme: 0

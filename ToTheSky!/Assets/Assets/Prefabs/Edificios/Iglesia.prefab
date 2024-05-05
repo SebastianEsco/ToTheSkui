@@ -133,7 +133,7 @@ MonoBehaviour:
   necesidadElectricidadCumplida: 0
   necesidadCalorCumplida: 0
   distanciaAIglesia: 0
-  distanciaAElectricidad: 3.5
+  distanciaAElectricidad: 3
   distanciaALava: 5
   cantidadDeEdificiosDeElectricidadCerca: 0
   cantidadDeEdificiosDeIglesiaCerca: 0

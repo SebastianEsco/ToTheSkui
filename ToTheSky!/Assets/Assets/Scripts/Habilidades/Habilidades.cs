@@ -45,7 +45,7 @@ public class Habilidades : MonoBehaviour
                 break;
 
              case 4: //Bajar altura
-                core.alturaNecesaria -= core.diasTrasncurridos * 0.5f;
+                core.alturaNecesaria -= core.diasTrasncurridos * 0.3f;
                 break;
 
             case 5: //Aumenta rango de energía, reduce el de las iglesias

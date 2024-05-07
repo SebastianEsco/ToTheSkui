@@ -16,7 +16,7 @@ public class EscogerHabilidadAlAzar : MonoBehaviour
         while (habilidadesRepartidas != 3)
         {
             int numero = Random.Range(0, habilidades.Count);
-            if(numero == 4 && GameObject.Find("Core").GetComponent<Core>().diasTrasncurridos < 2)
+            if(numero == 4 && GameObject.Find("Core").GetComponent<Core>().diasTrasncurridos < 3)
             {
                 Debug.Log("Salio la de bajar el limite pero no se aplicó");
                 continue;

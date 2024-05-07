@@ -193,12 +193,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   habilidades:
+  - {fileID: 5811279801633228813, guid: 0b5f66f1fd7e45c4298f17fe34885dc9, type: 3}
+  - {fileID: 5811279801633228813, guid: 6d73962aa65328d468b2e6bbc9b4be22, type: 3}
+  - {fileID: 5811279801633228813, guid: b654e909a7f0c214bb24521c58ba19d1, type: 3}
+  - {fileID: 5811279801633228813, guid: c9ef2836f3250294c93b804b49fc18ac, type: 3}
+  - {fileID: 5811279801633228813, guid: 2355e2d5b92fc1d48a9e5ec2aa256db5, type: 3}
   - {fileID: 5811279801633228813, guid: 433151b18df78474e85eb6ab08b0d557, type: 3}
-  - {fileID: 5811279801633228813, guid: dc111df7d14319e429c3888422aa3f01, type: 3}
-  - {fileID: 5811279801633228813, guid: 8ea2794e0edb55c4182140aa266935af, type: 3}
-  - {fileID: 5811279801633228813, guid: 9047f3d25cc8dfa4180b4f9e01eca935, type: 3}
-  - {fileID: 5811279801633228813, guid: a92aba9df713eee4ebf0314e396ea3bb, type: 3}
-  - {fileID: 5811279801633228813, guid: 6df3fb48c8f303f4bbc2c48857fdbb16, type: 3}
   habilidad1: {fileID: 0}
   habilidad2: {fileID: 0}
   habilidad3: {fileID: 0}

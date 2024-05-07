@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class Core : MonoBehaviour
 {
     public int diasTrasncurridos;
     public float alturaNecesaria;
+
+    public Image Caidos; //la barra que vaa indicar cuantos edificios se han caido
+
 
     //Crear un int por cada edificio que será necesario en el dia
     public List<int> edificiosDelDia = new List<int>();
@@ -46,7 +50,10 @@ public class Core : MonoBehaviour
 
     public void IniciarDia()
     {
-        if(!habitanteInconforme && (edificiosDesbordados != cantidadDeEdificiosQuePuedenCaer))
+        Caidos.fillAmount = 0; //la barra inicia vacía
+
+
+        if (!habitanteInconforme && (edificiosDesbordados != cantidadDeEdificiosQuePuedenCaer))
         {
             diasTrasncurridos++;
             cantidadDeEdificiosQuePuedenCaer = diasTrasncurridos * 3;
@@ -99,6 +106,8 @@ public class Core : MonoBehaviour
 
     public void Update()
     {
+        ActualizarBarraCaidos();
+
         //Linea de la altura minima
         mostrarAlturaNecesaria.transform.position = new Vector2(mostrarAlturaNecesaria.transform.position.x, alturaNecesaria + 0.4f); //Actualizar el mostrador de altura
 
@@ -140,6 +149,7 @@ public class Core : MonoBehaviour
             {
                 jugandoDia = false;
                 Invoke("FinDeDia", 3f);
+                
             }
 
             //Actualizar cuantos edificios falta poner
@@ -225,6 +235,15 @@ public class Core : MonoBehaviour
         GameObject.Find("ManejadorUI").GetComponent<ManejadorUI>().MostrarHabilidades(true);
     }
 
+    public void ActualizarBarraCaidos()
+    {
 
+        Debug.Log("entra a actualizarbarracaidos");
+        float progreso = (float) edificiosDesbordados / (float)cantidadDeEdificiosQuePuedenCaer;
+
+        Caidos.fillAmount = progreso;
+
+        
+    }
 
 }

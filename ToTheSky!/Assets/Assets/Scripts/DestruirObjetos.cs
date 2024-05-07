@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DestruirObjetos : MonoBehaviour
 {
+    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Edificio"))
@@ -11,6 +13,8 @@ public class DestruirObjetos : MonoBehaviour
             Debug.Log("EDIFICIO MUERTO");
             Destroy(collision.gameObject);
             GameObject.Find("Core").GetComponent<Core>().edificiosDesbordados++;
+            
+
         }
         
         

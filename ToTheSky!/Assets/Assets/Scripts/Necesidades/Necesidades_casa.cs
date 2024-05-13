@@ -19,6 +19,7 @@ public class Necesidades_casa : MonoBehaviour
     public int cantidadDeEdificiosDeElectricidadCerca, cantidadDeEdificiosDeIglesiaCerca, cantidadDeEdificiosDeLavaCerca;
     public int cantidadDeNecesidades, cantidadDeNecesidadesCumplidas;
 
+    float tiempoParaQueFuncioneLaCalmada;
 
     MejorasAEdificios mejoras;
 
@@ -27,6 +28,7 @@ public class Necesidades_casa : MonoBehaviour
     Core core;
     private void Start()
     {
+        tiempoParaQueFuncioneLaCalmada = 10f;
         core = GameObject.Find("Core").GetComponent<Core>();
         diaEnElQueSePuso = core.diasTrasncurridos;
         sr = GetComponent<SpriteRenderer>();
@@ -107,11 +109,7 @@ public class Necesidades_casa : MonoBehaviour
 
 
         //Revision Lava
-        if (cantidadDeEdificiosDeLavaCerca != 0)
-        {
-            necesidadCalorCumplida = true;
-        }
-        else if (transform.position.y < 5)
+        if (cantidadDeEdificiosDeLavaCerca != 0 || transform.position.y < 5)
         {
             necesidadCalorCumplida = true;
         }
@@ -165,10 +163,16 @@ public class Necesidades_casa : MonoBehaviour
         {
 
             sr.color = Color.white;
-            Invoke("RevisarSiCumplioMomentaneo", 1.5f);
+            tiempoParaQueFuncioneLaCalmada -= Time.deltaTime;
+
+            if(tiempoParaQueFuncioneLaCalmada < 0)
+            {
+                RevisarSiCumplioMomentaneo();
+            }
         }
         else
         {
+            tiempoParaQueFuncioneLaCalmada = 10f;
             if(diaEnElQueSePuso == core.diasTrasncurridos - 1)
             {
                 sr.color = Color.yellow;

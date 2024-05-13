@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b602db9e26246240b97a3bcb7082451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  siendoSeleccionada: 0
   testigoElectricidad: {fileID: 4975241881146989629}
   testigoIglesia: {fileID: 0}
   testigoCalor: {fileID: 5486500666582186526}

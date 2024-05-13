@@ -27,6 +27,8 @@ public class Core : MonoBehaviour
 
     //Texto de cada botón para actualizar cuanto toca poner de ese específico
     public List<TextMeshProUGUI> textosDeLosBotones = new List<TextMeshProUGUI>();
+    public TextMeshProUGUI textoBotonDestruirEdificio;
+    public int edificiosADestruir;
 
     MedidorDeAltura medidor;
     ManejadorUI manejadorUI;
@@ -157,6 +159,7 @@ public class Core : MonoBehaviour
             {
                 textosDeLosBotones[i].text = edificiosDelDia[i].ToString();
             }
+            textoBotonDestruirEdificio.text = edificiosADestruir.ToString();
 
         }
     }

@@ -7,9 +7,11 @@ public class PonerEdificio : MonoBehaviour
     public GameObject[] edificios;
     public GameObject[] edificiosPreview;
     MedidorDeAltura medidor;
+    public Color señalado;
     public GameObject camara;
     GameObject preview;
     public int edificioAPoner;
+    bool quitarEdificio;
     bool clickDeBoton;
 
     Core core;
@@ -23,7 +25,38 @@ public class PonerEdificio : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (quitarEdificio && core.edificiosADestruir > 0)
+        {
+            // Convierte la posición del mouse de la pantalla a un rayo en el mundo 3D
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
+
+            // Si el rayo intersecta con un GameObject
+            if (hit.collider != null)
+            {
+                // Verifica si el GameObject intersectado es el que queremos destruir
+                if (hit.collider.gameObject.CompareTag("Edificio"))
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        // Destruye el GameObject
+                        Debug.Log("Destruido");
+                        Destroy(hit.collider.gameObject);
+                        core.edificiosADestruir--;
+                    }
+                    else
+                    {
+
+                        hit.collider.gameObject.GetComponent<Necesidades_casa>().siendoSeleccionada = true;
+                        hit.collider.gameObject.GetComponent<SpriteRenderer>().color = señalado;
+                    }
+                    
+                }
+            }
+
+            
+        }
+        else if (Input.GetMouseButtonDown(0))
         {
             TratarDeConstruir();
             Destroy(preview);
@@ -32,7 +65,14 @@ public class PonerEdificio : MonoBehaviour
         else
         {
             Vector2 posicionDelClic = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if(posicionDelClic.y > camara.transform.position.y - 2.5f && core.RevisarCuantoFaltaPorPoner(edificioAPoner) > 0)
+            if (posicionDelClic.y > medidor.altura + 5)
+            {
+                if (preview != null)
+                {
+                    Destroy(preview);
+                }
+            }
+            else if (posicionDelClic.y > camara.transform.position.y - 2.5f && core.RevisarCuantoFaltaPorPoner(edificioAPoner) > 0)
             {
                 if (preview == null)
                 {
@@ -44,7 +84,7 @@ public class PonerEdificio : MonoBehaviour
                     preview.transform.position = posicionDelClic;
                 }
 
-                
+
             }
             else
             {
@@ -60,7 +100,7 @@ public class PonerEdificio : MonoBehaviour
             Vector2 posicionDelClic = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if(posicionDelClic.y > camara.transform.position.y -2.5f  && core.RevisarCuantoFaltaPorPoner(edificioAPoner) > 0)
             {
-                if(posicionDelClic.y < medidor.altura + 10)
+                if(posicionDelClic.y < medidor.altura + 5)
                 {
                     Instantiate(edificios[edificioAPoner], posicionDelClic, Quaternion.identity);
                     core.ReducirEdificio(edificioAPoner);
@@ -75,12 +115,18 @@ public class PonerEdificio : MonoBehaviour
         }
     }
 
-    void PrevisualizarEdificio()
-    {
-        
-    }
     public void EdificoElegido(int edificioElegido)
     {
+
         edificioAPoner = edificioElegido;
+        if (edificioElegido == 10) 
+        {
+            quitarEdificio = true; 
+        }
+        else 
+        {
+            quitarEdificio = false; 
+        }
+        
     }
 }

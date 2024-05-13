@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1348153208026103822}
   - component: {fileID: 1348153208026103823}
   - component: {fileID: 547441980351795885}
+  - component: {fileID: 4951559709791238387}
   m_Layer: 0
   m_Name: Electricidad
   m_TagString: Edificio
@@ -147,8 +148,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ed5bc72d150a84f84d0dbd813a5a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanciaDeExplosion: 1
+  distanciaDeExplosion: 1.25
   colliderPoom: {fileID: 7067901869316405639}
+--- !u!114 &4951559709791238387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348153208026103820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b602db9e26246240b97a3bcb7082451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  siendoSeleccionada: 0
+  testigoElectricidad: {fileID: 0}
+  testigoIglesia: {fileID: 0}
+  testigoCalor: {fileID: 0}
+  iglesia: 0
+  electricidad: 0
+  calor: 0
+  necesidadIglesiaCumplida: 0
+  necesidadElectricidadCumplida: 0
+  necesidadCalorCumplida: 0
+  distanciaAIglesia: 0
+  distanciaAElectricidad: 0
+  distanciaALava: 0
+  cantidadDeEdificiosDeElectricidadCerca: 0
+  cantidadDeEdificiosDeIglesiaCerca: 0
+  cantidadDeEdificiosDeLavaCerca: 0
+  cantidadDeNecesidades: 0
+  cantidadDeNecesidadesCumplidas: 0
 --- !u!1 &7067901869316405639
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,4 +227,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4.93
+  m_Radius: 5

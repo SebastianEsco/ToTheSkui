@@ -11,25 +11,28 @@ public class Columnas : MonoBehaviour
     Puntuacion_Mejora puntuacionMejoraScript;
     DatosDeMejoras datosDeMejoras;
     public int precio;
-    int guardarPrecioMomentaneo;
     public int nivelDeLaMejora;
 
-    public bool columna, estabilidad;
+    public bool columna, estabilidad, bases;
     private void Start()
     {
         puntuacionMejoraScript = GameObject.Find("Puntuacion").GetComponent<Puntuacion_Mejora>();
         datosDeMejoras = GameObject.Find("Puntuacion").GetComponent<DatosDeMejoras>();
-        guardarPrecioMomentaneo = precio;
         
         if(columna)
         {
             precio = datosDeMejoras.precioMejoraColumna;
             nivelDeLaMejora = datosDeMejoras.nivelMejoraColumna;
         }
-        else
+        else if(estabilidad)
         {
             precio = datosDeMejoras.precioMejoraEstabilidad;
-            nivelDeLaMejora = datosDeMejoras.NivelMejoraEstabilidad;
+            nivelDeLaMejora = datosDeMejoras.nivelMejoraEstabilidad;
+        }
+        else
+        {
+            precio = datosDeMejoras.precioMejoraBases;
+            nivelDeLaMejora = datosDeMejoras.nivelMejoraBases;
         }
 
     }
@@ -58,8 +61,21 @@ public class Columnas : MonoBehaviour
             puntuacionMejoraScript.puntuacion -= precio;
             nivelDeLaMejora++;
             precio += precio * (nivelDeLaMejora + 1);
-            datosDeMejoras.NivelMejoraEstabilidad = nivelDeLaMejora;
+            datosDeMejoras.nivelMejoraEstabilidad = nivelDeLaMejora;
             datosDeMejoras.precioMejoraEstabilidad = precio;
+
+        }
+    }
+
+    public void OnMejoraBases()
+    {
+        if (puntuacionMejoraScript.puntuacion >= precio)
+        {
+            puntuacionMejoraScript.puntuacion -= precio;
+            nivelDeLaMejora++;
+            precio += precio * (nivelDeLaMejora + 1);
+            datosDeMejoras.nivelMejoraBases = nivelDeLaMejora;
+            datosDeMejoras.precioMejoraBases = precio;
 
         }
     }

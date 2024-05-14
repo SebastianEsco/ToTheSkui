@@ -183,8 +183,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7477161110878166658, guid: 8e0726740872a6e4183cdfcd08a7376b, type: 3}
+      propertyPath: precioMejoraBases
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477161110878166658, guid: 8e0726740872a6e4183cdfcd08a7376b, type: 3}
       propertyPath: precioMejoraColumna
-      value: 50
+      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 7477161110878166658, guid: 8e0726740872a6e4183cdfcd08a7376b, type: 3}
       propertyPath: precioMejoraEstabilidad
@@ -432,7 +436,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 837839580}
-  - {fileID: 1500528454}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1505,12 +1508,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500528453}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0065785847, y: -0.35317343, z: 0.0065819565}
-  m_LocalScale: {x: 0.056353543, y: 0.03725231, z: 0.23950246}
+  m_LocalPosition: {x: -0.14000002, y: -1.1000023, z: 0.027567074}
+  m_LocalScale: {x: 1.0031036, y: 1.0031034, z: 1.0031034}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 497043057}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1500528455
 BoxCollider2D:

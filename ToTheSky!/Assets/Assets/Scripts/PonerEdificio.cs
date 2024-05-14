@@ -15,6 +15,8 @@ public class PonerEdificio : MonoBehaviour
     bool clickDeBoton;
     Tutorial tutorial;
 
+    Puntuacion_Mejora puntuacion;
+
     Core core;
 
     private void Start()
@@ -26,6 +28,7 @@ public class PonerEdificio : MonoBehaviour
         edificioAPoner = 0;
         medidor = GameObject.Find("LevelManager").GetComponent<MedidorDeAltura>();
         core = GameObject.Find("Core").GetComponent<Core>();
+        puntuacion = GameObject.Find("Puntuacion").GetComponent<Puntuacion_Mejora>();
     }
 
     void Update()
@@ -130,6 +133,7 @@ public class PonerEdificio : MonoBehaviour
                 {
                     Instantiate(edificios[edificioAPoner], posicionDelClic, Quaternion.identity);
                     core.ReducirEdificio(edificioAPoner);
+                    puntuacion.AumentarPuntuacion(edificioAPoner + 1);
                     medidor.MedirEdificios();
                 }
                 else

@@ -13,6 +13,9 @@ public class Core : MonoBehaviour
     DatosDeMejoras datosDeMejoras;
     public GameObject columnaDerecha, columnaIzquierda;
 
+    //Para las bases
+    public GameObject base1, base2, base3, base4;
+
     public int diasTrasncurridos;
     public float alturaNecesaria;
 
@@ -66,6 +69,10 @@ public class Core : MonoBehaviour
 
         //ActivarColumnas
         ActivarColumnas(datosDeMejoras.nivelMejoraColumna);
+        //Activar Mejora de estabilidad
+        MejorarEstabilidad(datosDeMejoras.nivelMejoraEstabilidad);
+        //Activar Bases
+        ActivarBases(datosDeMejoras.nivelMejoraBases);
 
 
 
@@ -249,10 +256,8 @@ public class Core : MonoBehaviour
             if (!habitanteInconforme)
             {
                 Debug.Log("Dia completado");
-                //Puntuacion_Mejora.puntuacion = puntuacion + 20;
-                //textoPuntuacion.text = "Puntuacion: " + puntuacion;
 
-                puntuacionMejoraScript.AumentarPuntuacion();
+                puntuacionMejoraScript.AumentarPuntuacion(5 * diasTrasncurridos);
                 ActivarCambioDeDia();
             }
         }
@@ -280,7 +285,12 @@ public class Core : MonoBehaviour
 
     public void MejorarEstabilidad(int nivelDeLaHabilidad)
     {
-        Physics2D.gravity = new Vector2(0, -10 * nivelDeLaHabilidad);
+        Physics2D.gravity = new Vector2(0, -10 + (nivelDeLaHabilidad));
+        if(Physics2D.gravity.y > 0)
+        {
+            Physics2D.gravity *= -1;
+        }
+        Debug.Log(Physics2D.gravity);
     }
 
     public void ActivarColumnas(int nivelDeLaHabilidad)
@@ -295,4 +305,32 @@ public class Core : MonoBehaviour
             columnaDerecha.SetActive(true);
         }
     }
+
+    public void ActivarBases(int nivelDeLaHabilidad)
+    {
+        if (nivelDeLaHabilidad == 1)
+        {
+            base1.SetActive(true);
+        }
+        else if (nivelDeLaHabilidad ==2)
+        {
+            base2.SetActive(true);
+            base1.SetActive(true) ;
+        }
+        else if (nivelDeLaHabilidad == 3)
+        {
+            base2.SetActive(true);
+            base1.SetActive(true);
+            base3.SetActive(true);
+        }
+        else if (nivelDeLaHabilidad > 3)
+        {
+            base2.SetActive(true);
+            base1.SetActive(true);
+            base3.SetActive(true);
+            base4.SetActive(true);
+        }
+    }
+
+
 }

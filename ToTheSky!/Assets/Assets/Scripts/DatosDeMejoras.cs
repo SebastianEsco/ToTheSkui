@@ -9,7 +9,11 @@ public class DatosDeMejoras : MonoBehaviour
     public int precioMejoraColumna;
 
     //Mejora Estabilidad
-    public int NivelMejoraEstabilidad;
+    public int nivelMejoraEstabilidad;
     public int precioMejoraEstabilidad;
+
+    //Mejora Bases
+    public int nivelMejoraBases;
+    public int precioMejoraBases;
 
 }

@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Columnas : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Puntuacion_Mejora puntuacionMejoraScript;
+
+    private void Start()
     {
-        
+        puntuacionMejoraScript = GameObject.Find("Puntuacion").GetComponent<Puntuacion_Mejora>();
+    }
+    void ActivarLasColumnas()
+    {
+        if (puntuacionMejoraScript.puntuacion>=30)
+        {
+
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

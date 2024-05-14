@@ -14,6 +14,7 @@ public class Core : MonoBehaviour
 
     public Image Caidos; //la barra que vaa indicar cuantos edificios se han caido
 
+    public GameObject columnas;
 
     //Crear un int por cada edificio que será necesario en el dia
     public List<int> edificiosDelDia = new List<int>();
@@ -55,6 +56,9 @@ public class Core : MonoBehaviour
 
 
         puntuacionMejoraScript = GameObject.Find("Puntuacion").GetComponent<Puntuacion_Mejora>();
+
+        columnas.SetActive(false);
+
         IniciarDia();
     }
 
@@ -233,7 +237,7 @@ public class Core : MonoBehaviour
                 //Puntuacion_Mejora.puntuacion = puntuacion + 20;
                 //textoPuntuacion.text = "Puntuacion: " + puntuacion;
 
-                puntuacionMejoraScript.aumentarPuntuacion();
+                puntuacionMejoraScript.AumentarPuntuacion();
                 ActivarCambioDeDia();
             }
         }
@@ -261,4 +265,8 @@ public class Core : MonoBehaviour
         
     }
 
+    public void ActivarColumnas()
+    {
+        columnas.SetActive(true);
+    }
 }

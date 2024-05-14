@@ -11,7 +11,7 @@ public class Puntuacion_Mejora : MonoBehaviour
     public TextMeshProUGUI textoPuntuacion;
 
     // Start is called before the first frame update
-    public void aumentarPuntuacion()
+    public void AumentarPuntuacion()
     {
         puntuacion = puntuacion + 20;
         textoPuntuacion.text = "Puntuacion: " + puntuacion;

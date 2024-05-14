@@ -7,11 +7,14 @@ using UnityEngine.UI;
 
 public class Core : MonoBehaviour
 {
+    Puntuacion_Mejora puntuacionMejoraScript;
+
     public int diasTrasncurridos;
     public float alturaNecesaria;
 
     public Image Caidos; //la barra que vaa indicar cuantos edificios se han caido
 
+    public GameObject columnas;
 
     //Crear un int por cada edificio que será necesario en el dia
     public List<int> edificiosDelDia = new List<int>();
@@ -27,6 +30,8 @@ public class Core : MonoBehaviour
 
     //Texto de cada botón para actualizar cuanto toca poner de ese específico
     public List<TextMeshProUGUI> textosDeLosBotones = new List<TextMeshProUGUI>();
+    public TextMeshProUGUI textoBotonDestruirEdificio;
+    public int edificiosADestruir;
 
     MedidorDeAltura medidor;
     ManejadorUI manejadorUI;
@@ -40,11 +45,20 @@ public class Core : MonoBehaviour
 
 
     int contadorParaCasasGrandes;
+
+    // PUNTUACION
+    //public int puntuacion;
     private void Start()
     {
         cantidadDeEdificiosQuePuedenCaer = 1; //Para que incie el día 1 la primera vez, si es = 0 no entra
         medidor = GameObject.Find("LevelManager").GetComponent<MedidorDeAltura>();
         manejadorUI = GameObject.Find("ManejadorUI").GetComponent<ManejadorUI>();
+
+
+        puntuacionMejoraScript = GameObject.Find("Puntuacion").GetComponent<Puntuacion_Mejora>();
+
+        columnas.SetActive(false);
+
         IniciarDia();
     }
 
@@ -157,6 +171,7 @@ public class Core : MonoBehaviour
             {
                 textosDeLosBotones[i].text = edificiosDelDia[i].ToString();
             }
+            textoBotonDestruirEdificio.text = edificiosADestruir.ToString();
 
         }
     }
@@ -213,12 +228,16 @@ public class Core : MonoBehaviour
 
     public void FinDeDia()
     {
+
         if (medidor.altura > alturaNecesaria)
         {
             if (!habitanteInconforme)
             {
                 Debug.Log("Dia completado");
+                //Puntuacion_Mejora.puntuacion = puntuacion + 20;
+                //textoPuntuacion.text = "Puntuacion: " + puntuacion;
 
+                puntuacionMejoraScript.AumentarPuntuacion();
                 ActivarCambioDeDia();
             }
         }
@@ -246,4 +265,8 @@ public class Core : MonoBehaviour
         
     }
 
+    public void ActivarColumnas()
+    {
+        columnas.SetActive(true);
+    }
 }

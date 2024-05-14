@@ -7,6 +7,8 @@ using UnityEngine;
 public class Necesidades_casa : MonoBehaviour
 {
     SpriteRenderer sr;
+    public bool siendoSeleccionada;
+    float tiempoDeRevisionSiYaNoEstaSeleccionada;
 
     public GameObject testigoElectricidad, testigoIglesia, testigoCalor;
 
@@ -19,6 +21,8 @@ public class Necesidades_casa : MonoBehaviour
     public int cantidadDeEdificiosDeElectricidadCerca, cantidadDeEdificiosDeIglesiaCerca, cantidadDeEdificiosDeLavaCerca;
     public int cantidadDeNecesidades, cantidadDeNecesidadesCumplidas;
 
+    float tiempoParaQueFuncioneLaCalmada;
+    bool subirEnojo;
 
     MejorasAEdificios mejoras;
 
@@ -27,6 +31,8 @@ public class Necesidades_casa : MonoBehaviour
     Core core;
     private void Start()
     {
+        tiempoDeRevisionSiYaNoEstaSeleccionada = 0.2f;
+        tiempoParaQueFuncioneLaCalmada = 10f;
         core = GameObject.Find("Core").GetComponent<Core>();
         diaEnElQueSePuso = core.diasTrasncurridos;
         sr = GetComponent<SpriteRenderer>();
@@ -107,11 +113,7 @@ public class Necesidades_casa : MonoBehaviour
 
 
         //Revision Lava
-        if (cantidadDeEdificiosDeLavaCerca != 0)
-        {
-            necesidadCalorCumplida = true;
-        }
-        else if (transform.position.y < 5)
+        if (cantidadDeEdificiosDeLavaCerca != 0 || transform.position.y < 5)
         {
             necesidadCalorCumplida = true;
         }
@@ -161,30 +163,48 @@ public class Necesidades_casa : MonoBehaviour
             }
         }
 
-        if (cantidadDeNecesidades == cantidadDeNecesidadesCumplidas)
+        if(!siendoSeleccionada)
         {
+            if (cantidadDeNecesidades == cantidadDeNecesidadesCumplidas || diaEnElQueSePuso == core.diasTrasncurridos)
+            {
 
-            sr.color = Color.white;
-            Invoke("RevisarSiCumplioMomentaneo", 1.5f);
+                sr.color = Color.white;
+                tiempoParaQueFuncioneLaCalmada -= Time.deltaTime;
+
+                if (tiempoParaQueFuncioneLaCalmada < 0)
+                {
+                    RevisarSiCumplioMomentaneo();
+                }
+            }
+            else
+            {
+                tiempoParaQueFuncioneLaCalmada = 10f;
+                if (diaEnElQueSePuso == core.diasTrasncurridos - 1)
+                {
+                    sr.color = Color.yellow;
+                    if (!subirEnojo)
+                    {
+                        core.edificiosDesbordados++;
+                        subirEnojo = true;
+                    }
+                }
+                else if (diaEnElQueSePuso == core.diasTrasncurridos - 2)
+                {
+                    sr.color = Color.red;
+                }
+                else if (diaEnElQueSePuso == core.diasTrasncurridos - 3)
+                {
+                    sr.color = Color.black;
+
+                    core.habitanteInconforme = true;
+                }
+
+            }
+
         }
         else
         {
-            if(diaEnElQueSePuso == core.diasTrasncurridos - 1)
-            {
-                sr.color = Color.yellow;
-            }
-            else if(diaEnElQueSePuso == core.diasTrasncurridos - 2)
-            {
-                sr.color = Color.red;
-            }
-            else if(diaEnElQueSePuso == core.diasTrasncurridos - 3)
-            {
-                sr.color = Color.black;
-
-                core.habitanteInconforme = true;
-                Debug.Log("FALLASTE CON LAS NECESIDADES DE UN HABITANTE");
-            }
-            
+            RevisarSiYaNoEstaSeleccionada();
         }
         
     }
@@ -194,9 +214,21 @@ public class Necesidades_casa : MonoBehaviour
         if (cantidadDeNecesidades == cantidadDeNecesidadesCumplidas)
         {
             //TODO MELO PUEDE SEGUIR BIEN
+            subirEnojo = false;
             diaEnElQueSePuso = core.diasTrasncurridos;
         }
     }
+
+    public void RevisarSiYaNoEstaSeleccionada()
+    {
+        tiempoDeRevisionSiYaNoEstaSeleccionada -= Time.deltaTime;
+        if(tiempoDeRevisionSiYaNoEstaSeleccionada < 0)
+        {
+            siendoSeleccionada = false;
+            tiempoDeRevisionSiYaNoEstaSeleccionada = 0.2f;
+        }
+    }
+
 
 
 

@@ -39,7 +39,6 @@ public class Habilidades : MonoBehaviour
 
             case 3: //Reduce la ira de los habitantes
 
-                Debug.Log("Holi");
                 core.edificiosDesbordados -= 5;
 
                 break;
@@ -50,8 +49,8 @@ public class Habilidades : MonoBehaviour
 
             case 5: //Aumenta rango de energía, reduce el de las iglesias
 
-                mejoras.MejorarEdificio(1, 0.75f);
-                mejoras.MejorarEdificio(0, -0.75f);
+                mejoras.MejorarEdificio(1, 0.55f);
+                mejoras.MejorarEdificio(0, -0.33f);
                 break;
 
             default:

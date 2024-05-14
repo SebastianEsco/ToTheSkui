@@ -9,6 +9,10 @@ public class Core : MonoBehaviour
 {
     Puntuacion_Mejora puntuacionMejoraScript;
 
+    //Para las columnas
+    DatosDeMejoras datosDeMejoras;
+    public GameObject columnaDerecha, columnaIzquierda;
+
     public int diasTrasncurridos;
     public float alturaNecesaria;
 
@@ -27,7 +31,7 @@ public class Core : MonoBehaviour
 
 
     //Textos para actualizar
-    public TextMeshProUGUI textoDiaActual, textoAlturaNecesaria;
+    public TextMeshProUGUI textoDiaActual;
 
 
     //Texto de cada botón para actualizar cuanto toca poner de ese específico
@@ -52,6 +56,7 @@ public class Core : MonoBehaviour
     //public int puntuacion;
     private void Start()
     {
+        datosDeMejoras = GameObject.Find("Puntuacion").GetComponent<DatosDeMejoras>();
         cantidadDeEdificiosQuePuedenCaer = 1; //Para que incie el día 1 la primera vez, si es = 0 no entra
         medidor = GameObject.Find("LevelManager").GetComponent<MedidorDeAltura>();
         manejadorUI = GameObject.Find("ManejadorUI").GetComponent<ManejadorUI>();
@@ -59,9 +64,11 @@ public class Core : MonoBehaviour
 
         puntuacionMejoraScript = GameObject.Find("Puntuacion").GetComponent<Puntuacion_Mejora>();
 
-        //columnas.SetActive(false);
+        //ActivarColumnas
+        ActivarColumnas(datosDeMejoras.nivelMejoraColumna);
 
-        Columnas.OnActivarColumnas += ActivarColumnas;
+
+
 
         IniciarDia();
     }
@@ -77,7 +84,6 @@ public class Core : MonoBehaviour
             cantidadDeEdificiosQuePuedenCaer = diasTrasncurridos * 3;
             textoDiaActual.text = "Día: " + diasTrasncurridos;
             alturaNecesaria += 0.4f * diasTrasncurridos;
-            textoAlturaNecesaria.text = "Altura necesaria: " + alturaNecesaria;
 
 
             //Edificios del día
@@ -127,7 +133,10 @@ public class Core : MonoBehaviour
         ActualizarBarraCaidos();
 
         //Linea de la altura minima
-        mostrarAlturaNecesaria.transform.position = new Vector2(mostrarAlturaNecesaria.transform.position.x, alturaNecesaria + 0.4f); //Actualizar el mostrador de altura
+        if(alturaNecesaria + 0.425f > mostrarAlturaNecesaria.transform.position.y)
+        {
+            mostrarAlturaNecesaria.transform.Translate(Vector2.up * Time.deltaTime * 0.3f);
+        } //Actualizar el mostrador de altura
 
         if(alturaNecesaria > medidor.altura)
         {
@@ -269,9 +278,16 @@ public class Core : MonoBehaviour
         
     }
 
-    public void ActivarColumnas()
+    public void ActivarColumnas(int nivelDeLaHabilidad)
     {
-        columnas.SetActive(true);
-        Debug.Log("Columnas activadas!");
+        if(nivelDeLaHabilidad == 1)
+        {
+            columnaIzquierda.SetActive(true);
+        }
+        else if (nivelDeLaHabilidad == 2)
+        {
+            columnaIzquierda.SetActive(true);
+            columnaDerecha.SetActive(true);
+        }
     }
 }

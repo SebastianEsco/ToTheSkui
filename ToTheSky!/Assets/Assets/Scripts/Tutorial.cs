@@ -6,7 +6,7 @@ public class Tutorial : MonoBehaviour
 {
 
     public bool tutorialActivo;
-    public GameObject tutorial1, tutorial2, tutorial3;
+    public GameObject introduccion, tutorial1, tutorial2, tutorial3;
     public GameObject tutorialLava, omitirTutorial;
     public bool tutorial1Mostrado, tutorialLavaMostrado;
     public int tutorialActual;
@@ -29,16 +29,23 @@ public class Tutorial : MonoBehaviour
             {
                 case 0:
 
-                    tutorial1.SetActive(true);
+                    introduccion.SetActive(true);
                     break;
                 case 1:
-                    tutorial1.SetActive(false);
-                    tutorial2.SetActive(true);
+
+                    tutorial1.SetActive(true);
+                    introduccion.SetActive(false);
                     break;
                 case 2:
                     tutorial1.SetActive(false);
+                    tutorial2.SetActive(true);
+                    introduccion.SetActive(false);
+                    break;
+                case 3:
+                    tutorial1.SetActive(false);
                     tutorial2.SetActive(false);
                     tutorial3.SetActive(true);
+                    introduccion.SetActive(false);
                     break;
 
                 case 100:
@@ -74,6 +81,7 @@ public class Tutorial : MonoBehaviour
         tutorial3.SetActive(false);
         tutorialLava.SetActive(false);
         omitirTutorial.SetActive(false);
+        introduccion.SetActive(false);
     }
 
   

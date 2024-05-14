@@ -1,28 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 
 public class Columnas : MonoBehaviour
 {
-    Puntuacion_Mejora puntuacionMejoraScript;
 
-    public delegate void ActivarColumnasDelegate();
-    public static event ActivarColumnasDelegate OnActivarColumnas;
+    public TextMeshProUGUI textoPrecio, textoNivel;
+    Puntuacion_Mejora puntuacionMejoraScript;
+    DatosDeMejoras datosDeMejoras;
+    public int precio;
+    int guardarPrecioMomentaneo;
+    public int nivelDeLaMejora;
 
     private void Start()
     {
         puntuacionMejoraScript = GameObject.Find("Puntuacion").GetComponent<Puntuacion_Mejora>();
-        
+        datosDeMejoras = GameObject.Find("Puntuacion").GetComponent<DatosDeMejoras>();
+        guardarPrecioMomentaneo = precio;
+        nivelDeLaMejora = datosDeMejoras.nivelMejoraColumna;
+
+        for (int i = 0; i < nivelDeLaMejora-1; i++) //ARREGLAR ESTO
+        {
+            precio += precio * (nivelDeLaMejora + 1);
+        }
+
+    }
+    private void Update()
+    {
+        textoNivel.text = "Nivel " + nivelDeLaMejora.ToString();
+        textoPrecio.text = "Precio: " + precio.ToString();
     }
     public void ActivarLasColumnas()
     {
-        if (puntuacionMejoraScript.puntuacion >= 30)
+        if (puntuacionMejoraScript.puntuacion >= precio)
         {
-            puntuacionMejoraScript.puntuacion -= 30;
+            puntuacionMejoraScript.puntuacion -= precio;
+            nivelDeLaMejora++;
+            precio += precio * (nivelDeLaMejora+1);
+            datosDeMejoras.nivelMejoraColumna = nivelDeLaMejora;
 
-            Debug.Log(" se compro mejora, puntuacion:" + puntuacionMejoraScript.puntuacion);
-            //OnActivarColumnas?.Invoke();
+        }
+    }
+
+    public void OnMejoraEstabilidad()
+    {
+        if (puntuacionMejoraScript.puntuacion >= precio)
+        {
+            puntuacionMejoraScript.puntuacion -= precio;
+            nivelDeLaMejora++;
+            precio += precio * 2;
+            datosDeMejoras.NivelMejoraEstabilidad = nivelDeLaMejora;
         }
     }
 

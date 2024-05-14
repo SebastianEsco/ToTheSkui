@@ -6,7 +6,6 @@ using TMPro;
 public class MedidorDeAltura : MonoBehaviour
 {
     public float altura, alturaMomentanea;
-    public TextMeshProUGUI textoAltura;
     GameObject edificoMasAltoActual;
     public bool midiendo;
     private void Start()
@@ -27,9 +26,6 @@ public class MedidorDeAltura : MonoBehaviour
             altura = 0f;
         }
 
-        
-
-        textoAltura.text = "Altura actual: " + altura.ToString("F1");
     }
 
     public void MedirEdificios()

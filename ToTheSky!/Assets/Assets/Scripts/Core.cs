@@ -59,7 +59,7 @@ public class Core : MonoBehaviour
 
         puntuacionMejoraScript = GameObject.Find("Puntuacion").GetComponent<Puntuacion_Mejora>();
 
-        columnas.SetActive(false);
+        //columnas.SetActive(false);
 
         IniciarDia();
     }
@@ -269,6 +269,6 @@ public class Core : MonoBehaviour
 
     public void ActivarColumnas()
     {
-        columnas.SetActive(true);
+        //columnas.SetActive(true);
     }
 }

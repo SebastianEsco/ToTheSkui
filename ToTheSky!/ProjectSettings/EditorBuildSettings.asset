@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Scenes/Men\xFA.unity"
     guid: 4eaa2c6b395b9dd47949d9e8c503efff
+  - enabled: 1
+    path: Assets/Scenes/Mejoras.unity
+    guid: 35121aa28ece3a8439aea114f6e16d7f
   m_configObjects: {}

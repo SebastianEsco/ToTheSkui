@@ -7,6 +7,7 @@ public class PoomElectricidad : MonoBehaviour
 {
     public float distanciaDeExplosion;
     public GameObject colliderPoom;
+    bool destruyendo;
 
     // Update is called once per frame
     void Update()
@@ -23,13 +24,18 @@ public class PoomElectricidad : MonoBehaviour
                 if(GameObject.Find("Core").GetComponent<Core>().inmunidadAExplosion > 0)
                 {
                     GameObject.Find("Core").GetComponent<Core>().inmunidadAExplosion--;
-                    GameObject.Find("Core").GetComponent<Core>().edificiosDesbordados++;
                     Destroy(gameObject);
                 }
                 else
                 {
-                    colliderPoom.SetActive(true);
-                    Destroy(gameObject, 0.3f);
+                    if (!destruyendo)
+                    {
+                        GameObject.Find("Core").GetComponent<Core>().edificiosDesbordados++;
+                        colliderPoom.SetActive(true);
+                        destruyendo = true;
+                        Destroy(gameObject, 0.3f);
+                    }
+                    
                 }
                 
             }

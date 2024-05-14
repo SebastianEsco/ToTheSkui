@@ -61,6 +61,8 @@ public class Core : MonoBehaviour
 
         //columnas.SetActive(false);
 
+        Columnas.OnActivarColumnas += ActivarColumnas;
+
         IniciarDia();
     }
 
@@ -269,6 +271,7 @@ public class Core : MonoBehaviour
 
     public void ActivarColumnas()
     {
-        //columnas.SetActive(true);
+        columnas.SetActive(true);
+        Debug.Log("Columnas activadas!");
     }
 }

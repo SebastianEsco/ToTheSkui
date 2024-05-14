@@ -11,7 +11,7 @@ public class Mejoras : MonoBehaviour
 
     private void Start()
     {
-        core = GameObject.Find("Core").GetComponent<Core>();
+        //core = GameObject.Find("Core").GetComponent<Core>();
         //mejoras = GameObject.Find("LevelManager").GetComponent<MejorasAEdificios>();
     }
 

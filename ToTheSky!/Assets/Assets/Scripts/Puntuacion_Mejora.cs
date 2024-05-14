@@ -27,9 +27,9 @@ public class Puntuacion_Mejora : MonoBehaviour
 
 
 
-    public void AumentarPuntuacion()
+    public void AumentarPuntuacion(int cantidad)
     {
-        puntuacion = puntuacion + 20;
+        puntuacion += cantidad;
         
 
     }

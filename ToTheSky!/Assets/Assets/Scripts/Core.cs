@@ -36,7 +36,7 @@ public class Core : MonoBehaviour
     ManejadorUI manejadorUI;
 
     
-    public GameObject mostrarAlturaNecesaria; //La barrita que muestra la altura que se necesita
+    public GameObject mostrarAlturaNecesaria, extraMostrarAlturaNecesaria; //La barrita que muestra la altura que se necesita
     public Color colorPorDebajo, colorPorEncima; //Los colores de la barrita
 
 
@@ -118,10 +118,12 @@ public class Core : MonoBehaviour
         if(alturaNecesaria > medidor.altura)
         {
             mostrarAlturaNecesaria.GetComponent<SpriteRenderer>().color = colorPorDebajo;
+            extraMostrarAlturaNecesaria.GetComponent<SpriteRenderer>().color = colorPorDebajo;
         }
         else
         {
             mostrarAlturaNecesaria.GetComponent<SpriteRenderer>().color = colorPorEncima;
+            extraMostrarAlturaNecesaria.GetComponent<SpriteRenderer>().color = colorPorEncima;
         }
 
 
@@ -242,8 +244,6 @@ public class Core : MonoBehaviour
 
     public void ActualizarBarraCaidos()
     {
-
-        Debug.Log("entra a actualizarbarracaidos");
         float progreso = (float) edificiosDesbordados / (float)cantidadDeEdificiosQuePuedenCaer;
 
         Caidos.fillAmount = progreso;

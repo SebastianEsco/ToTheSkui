@@ -50,7 +50,9 @@ public class PonerEdificio : MonoBehaviour
 
     public void AccionesPrincipales()
     {
-        if (quitarEdificio && core.edificiosADestruir > 0)
+
+        Vector2 posicionDelClic = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (quitarEdificio && core.edificiosADestruir > 0 && posicionDelClic.y > camara.transform.position.y - 2.5f)
         {
             // Convierte la posición del mouse de la pantalla a un rayo en el mundo 3D
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -89,7 +91,6 @@ public class PonerEdificio : MonoBehaviour
         }
         else
         {
-            Vector2 posicionDelClic = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (posicionDelClic.y > medidor.altura + 5)
             {
                 if (preview != null)

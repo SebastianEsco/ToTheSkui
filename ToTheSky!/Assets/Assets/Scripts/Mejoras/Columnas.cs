@@ -14,16 +14,22 @@ public class Columnas : MonoBehaviour
     int guardarPrecioMomentaneo;
     public int nivelDeLaMejora;
 
+    public bool columna, estabilidad;
     private void Start()
     {
         puntuacionMejoraScript = GameObject.Find("Puntuacion").GetComponent<Puntuacion_Mejora>();
         datosDeMejoras = GameObject.Find("Puntuacion").GetComponent<DatosDeMejoras>();
         guardarPrecioMomentaneo = precio;
-        nivelDeLaMejora = datosDeMejoras.nivelMejoraColumna;
-
-        for (int i = 0; i < nivelDeLaMejora-1; i++) //ARREGLAR ESTO
+        
+        if(columna)
         {
-            precio += precio * (nivelDeLaMejora + 1);
+            precio = datosDeMejoras.precioMejoraColumna;
+            nivelDeLaMejora = datosDeMejoras.nivelMejoraColumna;
+        }
+        else
+        {
+            precio = datosDeMejoras.precioMejoraEstabilidad;
+            nivelDeLaMejora = datosDeMejoras.NivelMejoraEstabilidad;
         }
 
     }
@@ -40,6 +46,7 @@ public class Columnas : MonoBehaviour
             nivelDeLaMejora++;
             precio += precio * (nivelDeLaMejora+1);
             datosDeMejoras.nivelMejoraColumna = nivelDeLaMejora;
+            datosDeMejoras.precioMejoraColumna = precio;
 
         }
     }
@@ -50,8 +57,10 @@ public class Columnas : MonoBehaviour
         {
             puntuacionMejoraScript.puntuacion -= precio;
             nivelDeLaMejora++;
-            precio += precio * 2;
+            precio += precio * (nivelDeLaMejora + 1);
             datosDeMejoras.NivelMejoraEstabilidad = nivelDeLaMejora;
+            datosDeMejoras.precioMejoraEstabilidad = precio;
+
         }
     }
 

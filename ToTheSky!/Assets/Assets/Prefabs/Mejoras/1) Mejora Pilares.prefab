@@ -519,8 +519,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textoPrecio: {fileID: 7222192092345371728}
   textoNivel: {fileID: 2135904493365601030}
-  precio: 100
+  precio: 1
   nivelDeLaMejora: 0
+  columna: 1
+  estabilidad: 0
 --- !u!1 &3427871668137118497
 GameObject:
   m_ObjectHideFlags: 0

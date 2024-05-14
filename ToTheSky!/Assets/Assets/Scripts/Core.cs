@@ -278,13 +278,18 @@ public class Core : MonoBehaviour
         
     }
 
+    public void MejorarEstabilidad(int nivelDeLaHabilidad)
+    {
+        Physics2D.gravity = new Vector2(0, -10 * nivelDeLaHabilidad);
+    }
+
     public void ActivarColumnas(int nivelDeLaHabilidad)
     {
         if(nivelDeLaHabilidad == 1)
         {
             columnaIzquierda.SetActive(true);
         }
-        else if (nivelDeLaHabilidad == 2)
+        else if (nivelDeLaHabilidad > 1)
         {
             columnaIzquierda.SetActive(true);
             columnaDerecha.SetActive(true);

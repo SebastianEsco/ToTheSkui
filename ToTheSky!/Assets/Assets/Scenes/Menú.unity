@@ -182,6 +182,14 @@ PrefabInstance:
       propertyPath: textoPuntuacion
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7477161110878166658, guid: 8e0726740872a6e4183cdfcd08a7376b, type: 3}
+      propertyPath: precioMejoraColumna
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477161110878166658, guid: 8e0726740872a6e4183cdfcd08a7376b, type: 3}
+      propertyPath: precioMejoraEstabilidad
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e0726740872a6e4183cdfcd08a7376b, type: 3}
 --- !u!1 &235573726
@@ -2435,7 +2443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ce3809a7bae594c8841a4a04613027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  escenaACambiar: 0
+  escenaACambiar: 1
 --- !u!1 &2096237070
 GameObject:
   m_ObjectHideFlags: 0

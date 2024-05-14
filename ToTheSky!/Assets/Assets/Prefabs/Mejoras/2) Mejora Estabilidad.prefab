@@ -599,6 +599,8 @@ MonoBehaviour:
   textoNivel: {fileID: 2135904493365601030}
   precio: 15
   nivelDeLaMejora: 0
+  columna: 0
+  estabilidad: 1
 --- !u!1 &3427871668137118497
 GameObject:
   m_ObjectHideFlags: 0

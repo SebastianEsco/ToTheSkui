@@ -55,6 +55,17 @@ public class Habilidades : MonoBehaviour
 
             default:
                 break;
+
+            case 6: //Da 3 cargas de destruir edificios
+
+                core.edificiosADestruir += 3;
+                break;
+
+            case 7: //Salvar de explosión
+
+                core.inmunidadAExplosion += 1;
+                break;
+
         }
 
         GameObject.Find("ManejadorUI").GetComponent<ManejadorUI>().MostrarHabilidades(false);

@@ -43,3 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Tutorial
+    uniqueID: 3288657799
+    locked: 0
+  - name: TextoDelTuroial
+    uniqueID: 451575419
+    locked: 0

@@ -10,7 +10,9 @@ public class Core : MonoBehaviour
     public int diasTrasncurridos;
     public float alturaNecesaria;
 
-    public Image Caidos; //la barra que vaa indicar cuantos edificios se han caido
+    public Image Caidos; //la barra que vaa indicar cuantos edificios se han caid
+
+    public int inmunidadAExplosion;
 
 
     //Crear un int por cada edificio que será necesario en el dia
@@ -134,7 +136,7 @@ public class Core : MonoBehaviour
             }
             else
             {
-                manejadorUI.MostrarQueSePerdio("Demasiados habitantes cayeron :(");
+                manejadorUI.MostrarQueSePerdio("La ira de los habitantes ha crecido demasiado");
             }
 
 

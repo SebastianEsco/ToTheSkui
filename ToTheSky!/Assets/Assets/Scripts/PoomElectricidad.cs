@@ -20,8 +20,18 @@ public class PoomElectricidad : MonoBehaviour
 
             if (edificio.name == "Lava(Clone)" && distanciaAlEdifico < distanciaDeExplosion)
             {
-                colliderPoom.SetActive(true);
-                Destroy(gameObject, 0.3f);
+                if(GameObject.Find("Core").GetComponent<Core>().inmunidadAExplosion > 0)
+                {
+                    GameObject.Find("Core").GetComponent<Core>().inmunidadAExplosion--;
+                    GameObject.Find("Core").GetComponent<Core>().edificiosDesbordados++;
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    colliderPoom.SetActive(true);
+                    Destroy(gameObject, 0.3f);
+                }
+                
             }
 
 

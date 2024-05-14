@@ -22,7 +22,7 @@ public class Necesidades_casa : MonoBehaviour
     public int cantidadDeNecesidades, cantidadDeNecesidadesCumplidas;
 
     float tiempoParaQueFuncioneLaCalmada;
-    bool subirEnojo;
+    bool subirEnojo, subirEnojo2;
 
     MejorasAEdificios mejoras;
 
@@ -191,6 +191,11 @@ public class Necesidades_casa : MonoBehaviour
                 else if (diaEnElQueSePuso == core.diasTrasncurridos - 2)
                 {
                     sr.color = Color.red;
+                    if (!subirEnojo2)
+                    {
+                        core.edificiosDesbordados++;
+                        subirEnojo2 = true;
+                    }
                 }
                 else if (diaEnElQueSePuso == core.diasTrasncurridos - 3)
                 {
@@ -215,6 +220,7 @@ public class Necesidades_casa : MonoBehaviour
         {
             //TODO MELO PUEDE SEGUIR BIEN
             subirEnojo = false;
+            subirEnojo2 = false;
             diaEnElQueSePuso = core.diasTrasncurridos;
         }
     }
@@ -225,7 +231,7 @@ public class Necesidades_casa : MonoBehaviour
         if(tiempoDeRevisionSiYaNoEstaSeleccionada < 0)
         {
             siendoSeleccionada = false;
-            tiempoDeRevisionSiYaNoEstaSeleccionada = 0.2f;
+            tiempoDeRevisionSiYaNoEstaSeleccionada = 0.1f;
         }
     }
 

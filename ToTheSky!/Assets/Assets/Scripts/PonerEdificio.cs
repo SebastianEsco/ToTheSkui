@@ -13,17 +13,42 @@ public class PonerEdificio : MonoBehaviour
     public int edificioAPoner;
     bool quitarEdificio;
     bool clickDeBoton;
+    Tutorial tutorial;
 
     Core core;
 
     private void Start()
     {
+        if (GameObject.Find("TUTORIAL") != null)
+        {
+            tutorial = GameObject.Find("TUTORIAL").GetComponent<Tutorial>();
+        }
         edificioAPoner = 0;
         medidor = GameObject.Find("LevelManager").GetComponent<MedidorDeAltura>();
         core = GameObject.Find("Core").GetComponent<Core>();
     }
 
     void Update()
+    {
+        if (edificioAPoner == 3 && !tutorial.tutorialLavaMostrado)
+        {
+            tutorial.tutorialActivo = true;
+            tutorial.tutorialActual = 100;
+        }
+        if (tutorial != null)
+        {
+            if (!tutorial.tutorialActivo)
+            {
+                AccionesPrincipales();
+            }
+        }
+        else
+        {
+            AccionesPrincipales();
+        }
+    }
+
+    public void AccionesPrincipales()
     {
         if (quitarEdificio && core.edificiosADestruir > 0)
         {
@@ -50,11 +75,11 @@ public class PonerEdificio : MonoBehaviour
                         hit.collider.gameObject.GetComponent<Necesidades_casa>().siendoSeleccionada = true;
                         hit.collider.gameObject.GetComponent<SpriteRenderer>().color = señalado;
                     }
-                    
+
                 }
             }
 
-            
+
         }
         else if (Input.GetMouseButtonDown(0))
         {

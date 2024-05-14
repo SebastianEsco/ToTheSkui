@@ -9,6 +9,8 @@ public class Core : MonoBehaviour
 {
     Puntuacion_Mejora puntuacionMejoraScript;
 
+    public GameObject mensajeDeWin;
+
     //Para las columnas
     DatosDeMejoras datosDeMejoras;
     public GameObject columnaDerecha, columnaIzquierda;
@@ -74,6 +76,8 @@ public class Core : MonoBehaviour
         //Activar Bases
         ActivarBases(datosDeMejoras.nivelMejoraBases);
 
+        mensajeDeWin.SetActive(false);
+
 
 
 
@@ -138,6 +142,11 @@ public class Core : MonoBehaviour
     public void Update()
     {
         ActualizarBarraCaidos();
+
+        if(medidor.altura >= 70)
+        {
+            mensajeDeWin.SetActive(true);
+        }
 
         //Linea de la altura minima
         if(alturaNecesaria + 0.425f > mostrarAlturaNecesaria.transform.position.y)

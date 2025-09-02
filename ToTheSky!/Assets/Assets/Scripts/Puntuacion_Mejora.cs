@@ -7,10 +7,13 @@ public class Puntuacion_Mejora : MonoBehaviour
 {
 
     public int puntuacion;
+    public int score;
     static Puntuacion_Mejora instance;
+    AuthHandler auth;
 
     private void Awake()
     {
+        auth = GetComponent<AuthHandler>();
         // Si ya hay una instancia creada, destruye esta
         if (instance != null && instance != this)
         {
@@ -18,11 +21,18 @@ public class Puntuacion_Mejora : MonoBehaviour
             return;
         }
 
-        // Si no hay una instancia, esta es la instancia única
+        // Si no hay una instancia, esta es la instancia ï¿½nica
         instance = this;
 
         // Asegura que este objeto no se destruya entre escenas
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void ReiniciarScore()
+    {
+        auth.UpdateScore(score);
+        Debug.Log("Puntaje actualizado");
+        score = 0;
     }
 
 
@@ -30,7 +40,6 @@ public class Puntuacion_Mejora : MonoBehaviour
     public void AumentarPuntuacion(int cantidad)
     {
         puntuacion += cantidad;
-        
-
+        score += cantidad;
     }
 }

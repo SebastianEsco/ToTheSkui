@@ -27,7 +27,7 @@ public class Core : MonoBehaviour
 
     public GameObject columnas;
 
-    //Crear un int por cada edificio que será necesario en el dia
+    //Crear un int por cada edificio que serï¿½ necesario en el dia
     public List<int> edificiosDelDia = new List<int>();
     int edificiosTotalesPorPoner;
 
@@ -39,7 +39,7 @@ public class Core : MonoBehaviour
     public TextMeshProUGUI textoDiaActual;
 
 
-    //Texto de cada botón para actualizar cuanto toca poner de ese específico
+    //Texto de cada botï¿½n para actualizar cuanto toca poner de ese especï¿½fico
     public List<TextMeshProUGUI> textosDeLosBotones = new List<TextMeshProUGUI>();
     public TextMeshProUGUI textoBotonDestruirEdificio;
     public int edificiosADestruir;
@@ -54,15 +54,17 @@ public class Core : MonoBehaviour
 
     public int edificiosDesbordados, cantidadDeEdificiosQuePuedenCaer; //Cuenta los edificios que se han caido y los que se pueden caer
 
-
+    private bool scoreActualizado;
+    
     int contadorParaCasasGrandes;
 
     // PUNTUACION
     //public int puntuacion;
     private void Start()
     {
+        scoreActualizado = false;
         datosDeMejoras = GameObject.Find("Puntuacion").GetComponent<DatosDeMejoras>();
-        cantidadDeEdificiosQuePuedenCaer = 1; //Para que incie el día 1 la primera vez, si es = 0 no entra
+        cantidadDeEdificiosQuePuedenCaer = 1; //Para que incie el dï¿½a 1 la primera vez, si es = 0 no entra
         medidor = GameObject.Find("LevelManager").GetComponent<MedidorDeAltura>();
         manejadorUI = GameObject.Find("ManejadorUI").GetComponent<ManejadorUI>();
 
@@ -86,18 +88,18 @@ public class Core : MonoBehaviour
 
     public void IniciarDia()
     {
-        Caidos.fillAmount = 0; //la barra inicia vacía
+        Caidos.fillAmount = 0; //la barra inicia vacï¿½a
 
 
         if (!habitanteInconforme && (edificiosDesbordados != cantidadDeEdificiosQuePuedenCaer))
         {
             diasTrasncurridos++;
             cantidadDeEdificiosQuePuedenCaer = diasTrasncurridos * 3;
-            textoDiaActual.text = "Día: " + diasTrasncurridos;
+            textoDiaActual.text = "Dï¿½a: " + diasTrasncurridos;
             alturaNecesaria += 0.4f * diasTrasncurridos;
 
 
-            //Edificios del día
+            //Edificios del dï¿½a
 
             edificiosDelDia[0] += Convert.ToInt32(1.75f * diasTrasncurridos);
             edificiosDelDia[1] += 1 + (diasTrasncurridos / 2);
@@ -166,10 +168,14 @@ public class Core : MonoBehaviour
         }
 
 
-
+        //lOSE CONDITION
         if (habitanteInconforme || (edificiosDesbordados >= cantidadDeEdificiosQuePuedenCaer))
         {
-
+            if (!scoreActualizado)
+            {
+                puntuacionMejoraScript.ReiniciarScore();
+                scoreActualizado = true;
+            }
             //TRIGGER PANTALLA DE DERROTA
             if (habitanteInconforme)
             {

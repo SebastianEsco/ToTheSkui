@@ -272,7 +272,7 @@ public class Core : MonoBehaviour
             {
                 Debug.Log("Dia completado");
 
-                puntuacionMejoraScript.AumentarPuntuacion(5 * diasTrasncurridos);
+                puntuacionMejoraScript.AumentarPuntuacion(15 * diasTrasncurridos);
                 ActivarCambioDeDia();
             }
         }

@@ -184,15 +184,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7477161110878166658, guid: 8e0726740872a6e4183cdfcd08a7376b, type: 3}
       propertyPath: precioMejoraBases
-      value: 150
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 7477161110878166658, guid: 8e0726740872a6e4183cdfcd08a7376b, type: 3}
       propertyPath: precioMejoraColumna
-      value: 25
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 7477161110878166658, guid: 8e0726740872a6e4183cdfcd08a7376b, type: 3}
       propertyPath: precioMejoraEstabilidad
-      value: 75
+      value: 750
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e0726740872a6e4183cdfcd08a7376b, type: 3}

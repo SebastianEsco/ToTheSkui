@@ -18,7 +18,7 @@ public class AuthHandler : MonoBehaviour
     public bool isLoggedIn = false;
 
 
-    private string apiUrl = "https://sid-restapi.onrender.com";
+    private string apiUrl = "http://localhost:1234";
 
     void OnEnable()
     {

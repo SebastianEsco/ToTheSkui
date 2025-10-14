@@ -9,11 +9,11 @@ public class Puntuacion_Mejora : MonoBehaviour
     public int puntuacion;
     public int score;
     static Puntuacion_Mejora instance;
-    AuthHandler auth;
+    Puntuaciones puntuaciones;
 
     private void Awake()
     {
-        auth = GetComponent<AuthHandler>();
+        puntuaciones = GetComponent<Puntuaciones>();
         // Si ya hay una instancia creada, destruye esta
         if (instance != null && instance != this)
         {
@@ -30,7 +30,7 @@ public class Puntuacion_Mejora : MonoBehaviour
 
     public void ReiniciarScore()
     {
-        auth.UpdateScore(score);
+        puntuaciones.UpdateScore(score);
         Debug.Log("Puntaje actualizado");
         score = 0;
     }
